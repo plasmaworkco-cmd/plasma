@@ -1,1 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Fragment+Mono&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @import "tailwindcss";
+
+@theme {
+  --color-deep-black: #0B0F14;
+  --color-secondary-black: #121A22;
+  --color-emerald: #50C878;
+  --color-evergreen: #013220;
+  --color-royal-amethyst: #0B6E4F;
+  --color-mint: #D1F2EB;
+  --color-primary-text: #E6EDF3;
+  --color-muted-text: #9AA4AF;
+
+  --font-heading: 'Montserrat', sans-serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+body {
+  @apply bg-deep-black text-primary-text font-body antialiased;
+}
