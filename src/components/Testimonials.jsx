@@ -34,7 +34,7 @@ const Testimonials = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 relative z-20">
                     {stories.map((story, idx) => (
                         <div key={idx} className="group relative p-8 md:p-12 bg-deep-black rounded-[2.5rem] border border-mint/5 hover:border-emerald/30 transition-all duration-700">
                             

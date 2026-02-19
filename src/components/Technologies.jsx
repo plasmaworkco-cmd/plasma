@@ -35,7 +35,7 @@ const Technologies = () => {
         <div className="flex animate-marquee whitespace-nowrap">
           {/* Double map to ensure seamless loop */}
           {[...techs, ...techs].map((tech, idx) => (
-            <div key={idx} className="flex items-center gap-6 mx-12">
+            <div key={idx} className="flex items-center gap-4 md:gap-6 mx-8 md:mx-12">
               {/* Electric Pulse Dot */}
               <div className="w-2 h-2 rounded-full bg-emerald shadow-[0_0_15px_#50C878] animate-pulse"></div>
               <span className="text-4xl md:text-7xl font-black text-primary-text/10 group-hover:text-primary-text transition-colors duration-700 tracking-tighter uppercase italic font-heading select-none">

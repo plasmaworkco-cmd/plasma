@@ -42,7 +42,7 @@ const Navbar = () => {
           </div>
 
           {/* The Commitment (CTA) */}
-          <button className="relative group overflow-hidden px-6 py-2.5 rounded-full bg-emerald text-deep-black font-bold text-sm transition-all hover:shadow-[0_0_20px_rgba(80,200,120,0.4)] hover:scale-105 active:scale-95 font-heading tracking-wide">
+          <button className="relative group overflow-hidden px-6 py-2.5 rounded-full bg-emerald text-deep-black font-bold text-sm transition-all hover:shadow-[0_0_20px_rgba(80,200,120,0.4)] hover:scale-105 active:scale-95 font-heading tracking-wide cursor-pointer">
             <span className="relative z-10">Start a Project</span>
             <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
           </button>
@@ -71,7 +71,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile CTA */}
-        <button className="px-5 py-3 rounded-xl bg-emerald text-deep-black font-extrabold text-[10px] sm:text-xs font-heading tracking-widest uppercase shadow-lg shadow-emerald/20 active:scale-95 transition-transform">
+        <button className="px-5 py-3 rounded-xl bg-emerald text-deep-black font-extrabold text-[10px] sm:text-xs font-heading tracking-widest uppercase shadow-lg shadow-emerald/20 active:scale-95 transition-transform cursor-pointer">
           Start Project
         </button>
       </nav>

@@ -59,7 +59,7 @@ const Process = () => {
                         {steps.map((step, idx) => (
                             <div 
                                 key={step.id} 
-                                className={`relative cursor-pointer transition-all duration-500 ${idx === activeStep ? 'opacity-100 translate-x-4' : 'opacity-30 hover:opacity-50'}`}
+                                className={`relative cursor-pointer transition-all duration-500 py-4 ${idx === activeStep ? 'opacity-100 translate-x-4' : 'opacity-30 hover:opacity-50'}`}
                                 onMouseEnter={() => setActiveStep(idx)}
                             >
                                 {/* Digital Node */}

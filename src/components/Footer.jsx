@@ -38,7 +38,7 @@ const Footer = () => {
               <li key={item}>
                 <a 
                   href={item === 'Home' ? '#' : `#${item.toLowerCase().replace(' ', '-')}`} 
-                  className="text-muted-text hover:text-emerald transition-all duration-300 flex items-center group font-body"
+                  className="text-muted-text hover:text-emerald transition-all duration-300 flex items-center group font-body cursor-pointer"
                 >
                   <span className="w-0 group-hover:w-4 h-[1px] bg-emerald mr-0 group-hover:mr-2 transition-all"></span>
                   {item}

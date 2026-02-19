@@ -57,7 +57,7 @@ const FeaturedWork = () => {
             {/* Content Container */}
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 flex flex-col justify-end z-20 pointer-events-none">
               {/* Category Badge */}
-              <div className="flex items-center gap-2 mb-3 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+              <div className="flex items-center gap-2 mb-3 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 delay-100">
                 <span className="w-6 h-[1px] bg-[#50C878]"></span>
                 <span className="text-[#50C878] text-[9px] md:text-xs font-black uppercase tracking-[0.2em] font-heading">
                   {project.category}
@@ -90,9 +90,9 @@ const FeaturedWork = () => {
       </div>
       
       {/* Portfolio CTA */}
-      <div className="bg-[#0B0F14] py-24 text-center border-t border-[#D1F2EB]/5">
+      <div className="bg-[#0B0F14] py-24 text-center border-t border-[#D1F2EB]/5 relative z-10">
         <p className="text-[#9AA4AF] mb-6 text-sm uppercase tracking-widest font-bold font-heading">Ready to see more?</p>
-        <a href="#" className="inline-flex items-center gap-4 text-2xl font-black text-[#E6EDF3] group transition-all font-heading hover:text-[#50C878]">
+        <a href="#" className="inline-flex items-center gap-4 text-2xl font-black text-[#E6EDF3] group transition-all font-heading hover:text-[#50C878] cursor-pointer">
           View All Case Studies
           <span className="text-[#50C878] group-hover:translate-x-3 transition-transform duration-300">→</span>
         </a>
