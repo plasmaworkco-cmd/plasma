@@ -1,4 +1,5 @@
 import React from 'react';
+import { ThemeProvider } from './context/ThemeContext';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SocialProof from './components/SocialProof';
@@ -13,10 +14,11 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="bg-deep-black min-h-screen text-primary-text selection:bg-emerald selection:text-deep-black antialiased pb-24 md:pb-0 font-body">
-      <Navbar />
-      
-      <main>
+    <ThemeProvider>
+      <div className="bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased pb-24 md:pb-0 font-body transition-colors duration-300">
+        <Navbar />
+        
+        <main>
         <Hero />
         <SocialProof />
         <Services />
@@ -29,7 +31,8 @@ function App() {
       </main>
 
       <Footer />
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }
 

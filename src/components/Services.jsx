@@ -32,37 +32,37 @@ const Services = () => {
   ];
 
   return (
-    <section id="solutions" className="bg-secondary-black py-20 md:py-32 relative overflow-hidden">
+    <section id="solutions" className="bg-secondary py-20 md:py-32 relative overflow-hidden">
       {/* Background Radial Glow */}
       <div className="absolute -top-24 -left-24 w-96 h-96 bg-evergreen opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="mb-20 text-center md:text-left">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-primary-text mb-6 tracking-tighter font-heading">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-text-primary mb-6 tracking-tighter font-heading">
             THE SOLUTIONS <span className="text-emerald drop-shadow-[0_0_15px_rgba(80,200,120,0.3)]">MATRIX.</span>
           </h2>
-          <p className="text-muted-text max-w-xl text-lg md:text-xl font-medium font-body">
+          <p className="text-text-secondary max-w-xl text-lg md:text-xl font-medium font-body">
             We don't offer generic packages. We build specialized engines for high-impact business outcomes.
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="group relative p-8 md:p-10 rounded-[2rem] bg-deep-black border border-mint/5 transition-all duration-700 hover:border-emerald/40 hover:-translate-y-3">
+            <div key={index} className="group relative p-8 md:p-10 rounded-[2rem] bg-primary border border-mint/5 transition-all duration-700 hover:border-emerald/40 hover:-translate-y-3">
               
               {/* Icon Container with Pulsing Glow */}
               <div className="relative w-16 h-16 mb-10 flex items-center justify-center">
                 <div className="absolute inset-0 bg-emerald opacity-10 blur-xl group-hover:opacity-30 transition-opacity"></div>
-                <div className="relative z-10 w-full h-full bg-secondary-black rounded-2xl border border-emerald/20 flex items-center justify-center text-emerald group-hover:scale-110 transition-transform duration-500">
+                <div className="relative z-10 w-full h-full bg-secondary rounded-2xl border border-emerald/20 flex items-center justify-center text-emerald group-hover:scale-110 transition-transform duration-500">
                   {service.icon}
                 </div>
               </div>
 
-              <h3 className="text-2xl font-black text-primary-text mb-4 tracking-tight font-heading">
+              <h3 className="text-2xl font-black text-text-primary mb-4 tracking-tight font-heading">
                 {service.title}
               </h3>
               
-              <p className="text-muted-text leading-relaxed mb-10 text-base group-hover:text-primary-text/80 transition-colors font-body">
+              <p className="text-text-secondary leading-relaxed mb-10 text-base group-hover:text-text-primary/80 transition-colors font-body">
                 {service.description}
               </p>
 

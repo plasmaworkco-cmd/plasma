@@ -2,20 +2,46 @@
 
 @import "tailwindcss";
 
-@theme {
-  --color-deep-black: #0B0F14;
-  --color-secondary-black: #121A22;
+:root {
+  /* Light Mode (Default) */
+  --color-primary: #F9FAFB;      /* Light Gray/White - Main Background */
+  --color-secondary: #FFFFFF;    /* White - Secondary Background */
+  --color-text-primary: #111827; /* Dark Gray - Main Text */
+  --color-text-secondary: #4B5563; /* Gray - Secondary Text */
+  
+  /* Brand Colors (remain mostly constant but can be tweaked) */
   --color-emerald: #50C878;
   --color-evergreen: #013220;
   --color-royal-amethyst: #0B6E4F;
   --color-mint: #D1F2EB;
-  --color-primary-text: #E6EDF3;
-  --color-muted-text: #9AA4AF;
-
+  
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Inter', sans-serif;
 }
 
+.dark {
+  /* Dark Mode */
+  --color-primary: #0B0F14;      /* Deep Black */
+  --color-secondary: #121A22;    /* Secondary Black */
+  --color-text-primary: #E6EDF3; /* Light Text */
+  --color-text-secondary: #9AA4AF; /* Muted Text */
+}
+
+@theme {
+  --color-primary: var(--color-primary);
+  --color-secondary: var(--color-secondary);
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+
+  --color-emerald: var(--color-emerald);
+  --color-evergreen: var(--color-evergreen);
+  --color-royal-amethyst: var(--color-royal-amethyst);
+  --color-mint: var(--color-mint);
+  
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
 body {
-  @apply bg-deep-black text-primary-text font-body antialiased;
+  @apply bg-primary text-text-primary font-body antialiased transition-colors duration-300;
 }
