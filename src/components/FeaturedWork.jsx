@@ -28,9 +28,9 @@ const FeaturedWork = () => {
 
   return (
     <section id="work" className="bg-[#0B0F14] py-0 border-t border-[#D1F2EB]/5 overflow-hidden">
-      <div className="grid grid-cols-1 lg:grid-cols-3 min-h-[650px]">
+      <div className="grid grid-cols-1 lg:grid-cols-3 min-h-auto lg:min-h-[650px]">
         {projects.map((project, idx) => (
-          <div key={idx} className="group relative border-r border-[#D1F2EB]/5 overflow-hidden min-h-[500px] cursor-pointer">
+          <div key={idx} className="group relative border-r border-[#D1F2EB]/5 overflow-hidden min-h-[400px] md:min-h-[500px] cursor-pointer">
             
             {/* Background Layer with Depth */}
             <div className={`absolute inset-0 transition-transform duration-1000 group-hover:scale-110 bg-[#121A22]`}>
@@ -55,21 +55,21 @@ const FeaturedWork = () => {
             </a>
 
             {/* Content Container */}
-            <div className="absolute inset-x-0 bottom-0 p-12 flex flex-col justify-end z-20 pointer-events-none">
+            <div className="absolute inset-x-0 bottom-0 p-6 md:p-12 flex flex-col justify-end z-20 pointer-events-none">
               {/* Category Badge */}
-              <div className="flex items-center gap-2 mb-4 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
-                <span className="w-8 h-[1px] bg-[#50C878]"></span>
-                <span className="text-[#50C878] text-xs font-black uppercase tracking-[0.3em] font-heading">
+              <div className="flex items-center gap-2 mb-3 translate-y-8 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <span className="w-6 h-[1px] bg-[#50C878]"></span>
+                <span className="text-[#50C878] text-[9px] md:text-xs font-black uppercase tracking-[0.2em] font-heading">
                   {project.category}
                 </span>
               </div>
 
               {/* Title & Description */}
-              <h3 className="text-4xl font-black text-[#E6EDF3] mb-4 tracking-tighter font-heading relative">
+              <h3 className="text-2xl md:text-4xl font-black text-[#E6EDF3] mb-3 tracking-tighter font-heading relative">
                 {project.name}<span className="text-[#50C878]">.</span>
               </h3>
               
-              <p className="text-[#9AA4AF] text-sm max-w-xs mb-8 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 font-body">
+              <p className="text-[#9AA4AF] text-xs max-w-xs mb-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150 font-body">
                 {project.desc}
               </p>
 

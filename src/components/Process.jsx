@@ -31,16 +31,16 @@ const Process = () => {
     const [activeStep, setActiveStep] = useState(0);
 
     return (
-        <section id="process" className="bg-secondary-black py-40 relative overflow-hidden">
+        <section id="process" className="bg-secondary-black py-24 md:py-40 relative overflow-hidden">
             {/* Background Texture */}
             <div className="absolute inset-0 opacity-[0.03] pointer-events-none" 
                  style={{backgroundImage: 'url("https://www.transparenttextures.com/patterns/carbon-fibre.png")'}}></div>
 
-            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
+            <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
                 
                 {/* Left: Interactive Timeline */}
                 <div>
-                    <h2 className="text-5xl md:text-7xl font-black text-primary-text mb-8 tracking-tighter font-heading">
+                    <h2 className="text-4xl md:text-5xl lg:text-7xl font-black text-primary-text mb-8 tracking-tighter font-heading">
                         THE PLASMA <span className="text-emerald drop-shadow-[0_0_15px_rgba(80,200,120,0.3)]">BLUEPRINT.</span>
                     </h2>
                     <p className="text-muted-text text-xl mb-16 max-w-md font-medium font-body">

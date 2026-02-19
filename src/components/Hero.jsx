@@ -6,10 +6,10 @@ const Hero = () => {
       
       {/* ATMOSPHERIC BACKGROUND */}
       {/* Deep Royal Amethyst glow for depth */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[600px] bg-royal-amethyst opacity-10 blur-[180px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[900px] md:h-[600px] bg-royal-amethyst opacity-10 blur-[100px] md:blur-[180px] rounded-full pointer-events-none"></div>
       
       {/* Secondary Soft Emerald Glow */}
-      <div className="absolute top-[30%] left-[60%] w-[500px] h-[500px] bg-emerald/10 blur-[200px] rounded-full pointer-events-none"></div>
+      <div className="absolute top-[30%] left-[60%] w-[200px] h-[200px] md:w-[500px] md:h-[500px] bg-emerald/10 blur-[100px] md:blur-[200px] rounded-full pointer-events-none"></div>
       
       {/* Central "Energy" Pillar with Breathing Animation */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1px] h-full bg-gradient-to-b from-transparent via-emerald to-transparent opacity-30 animate-pulse pointer-events-none"></div>
@@ -28,7 +28,7 @@ const Hero = () => {
         </div>
 
         {/* HEADLINE: More Business Impact */}
-        <h1 className="text-6xl md:text-8xl font-black text-primary-text leading-[1.05] tracking-tight font-heading">
+        <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-primary-text leading-[1.05] tracking-tight font-heading">
           WE BUILD <br />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald via-mint to-emerald drop-shadow-[0_0_40px_rgba(80,200,120,0.45)]">
             DIGITAL EXPERIENCES.
@@ -42,14 +42,14 @@ const Hero = () => {
 
         {/* ACTION BUTTONS */}
         <div className="mt-14 flex flex-col items-center justify-center gap-6">
-          <div className="flex flex-col sm:flex-row gap-6">
-            <button className="group relative px-10 py-4 bg-emerald text-deep-black font-bold text-lg rounded-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(80,200,120,0.4)] active:scale-95 overflow-hidden font-heading tracking-wide shadow-lg">
+          <div className="flex flex-col sm:flex-row gap-6 w-full sm:w-auto">
+            <button className="group relative w-full sm:w-auto px-10 py-4 bg-emerald text-deep-black font-bold text-lg rounded-lg transition-all hover:scale-105 hover:shadow-[0_0_40px_rgba(80,200,120,0.4)] active:scale-95 overflow-hidden font-heading tracking-wide shadow-lg">
               <span className="relative z-10">Start Your Project</span>
               {/* White-hot glow effect on hover */}
               <div className="absolute inset-0 bg-mint translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
             </button>
 
-            <button className="px-10 py-4 border border-white/10 text-primary-text font-bold text-lg rounded-lg hover:border-emerald hover:text-emerald transition-colors font-heading tracking-wide">
+            <button className="w-full sm:w-auto px-10 py-4 border border-white/10 text-primary-text font-bold text-lg rounded-lg hover:border-emerald hover:text-emerald transition-colors font-heading tracking-wide">
               View Our Work
             </button>
           </div>

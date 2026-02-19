@@ -17,13 +17,13 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="bg-deep-black py-32 relative overflow-hidden">
+    <section className="bg-deep-black py-20 md:py-32 relative overflow-hidden">
       {/* Background accents */}
-      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-royal-amethyst opacity-5 blur-[100px] rounded-full pointer-events-none"></div>
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-royal-amethyst opacity-5 blur-[60px] md:blur-[100px] rounded-full pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-20">
-          <h2 className="text-4xl md:text-5xl font-black text-primary-text mb-6 font-heading">
+        <div className="text-center mb-16 md:mb-20">
+          <h2 className="text-3xl md:text-5xl font-black text-primary-text mb-6 font-heading">
             THE PLASMA <span className="text-emerald">EDGE.</span>
           </h2>
           <p className="text-muted-text max-w-2xl mx-auto font-body">

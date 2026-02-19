@@ -71,7 +71,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile CTA */}
-        <button className="px-5 py-3 rounded-xl bg-emerald text-deep-black font-extrabold text-xs font-heading tracking-widest uppercase shadow-lg shadow-emerald/20 active:scale-95 transition-transform">
+        <button className="px-5 py-3 rounded-xl bg-emerald text-deep-black font-extrabold text-[10px] sm:text-xs font-heading tracking-widest uppercase shadow-lg shadow-emerald/20 active:scale-95 transition-transform">
           Start Project
         </button>
       </nav>

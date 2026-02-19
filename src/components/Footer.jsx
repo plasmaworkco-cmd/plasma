@@ -4,11 +4,11 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-deep-black pt-24 pb-12 border-t border-mint/5 relative overflow-hidden">
+    <footer className="bg-deep-black pt-16 pb-8 md:pt-24 md:pb-12 border-t border-mint/5 relative overflow-hidden">
       {/* Subtle Bottom Glow for Depth */}
       <div className="absolute bottom-[-100px] left-1/2 -translate-x-1/2 w-full h-[200px] bg-evergreen opacity-10 blur-[100px]"></div>
 
-      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-16 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-16 relative z-10">
         
         {/* Brand Identity Section */}
         <div className="col-span-1">
