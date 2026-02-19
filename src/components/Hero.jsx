@@ -16,16 +16,7 @@ const Hero = () => {
 
       <div className="relative z-10 container mx-auto px-6 text-center">
         
-        {/* TOP BADGE */}
-        <div className="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-mint/10 bg-secondary-black/40 backdrop-blur-lg mb-12">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald"></span>
-          </span>
-          <span className="text-[11px] font-bold uppercase tracking-[0.3em] text-primary-text font-heading">
-            Premium Web Development
-          </span>
-        </div>
+       
 
         {/* HEADLINE: More Business Impact */}
         <h1 className="text-4xl sm:text-6xl md:text-8xl font-black text-primary-text leading-[1.05] tracking-tight font-heading">
