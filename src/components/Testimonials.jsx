@@ -1,4 +1,5 @@
 //size medium-large
+//size medium-large
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 const Testimonials = () => {
@@ -56,8 +57,6 @@ const Testimonials = () => {
 
   const videos = [...clientVideos, ...clientVideos, ...clientVideos, ...clientVideos];
 
-  // --- CHANGED: Medium-Large Size ---
-  // Tuned to 420px for desktop.
   const CARD_WIDTH_DESKTOP = 420;
   const singleSetWidth = clientVideos.length * CARD_WIDTH_DESKTOP;
 
@@ -102,7 +101,8 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="bg-white py-24 md:py-40 relative overflow-hidden font-body">
+    // CHANGED: py-24 md:py-40 → pt-24 md:pt-40 pb-10 md:pb-16
+    <section className="bg-white pt-24 md:pt-40 pb-10 md:pb-16 relative overflow-hidden font-body">
 
       {/* --- Header --- */}
       <div className="max-w-7xl mx-auto px-6 mb-16 relative z-10 text-center">
@@ -132,14 +132,10 @@ const Testimonials = () => {
               return (
                 <div
                   key={uniqueId}
-                  // --- CHANGED: Widths ---
-                  // w-[280px] -> w-[300px] | sm:w-[320px] -> sm:w-[360px] | md:w-[380px] -> md:w-[420px]
                   className="flex-shrink-0 w-[300px] sm:w-[360px] md:w-[420px] group cursor-pointer"
                   onMouseEnter={() => handleCardHover(uniqueId)}
                   onMouseLeave={() => handleCardLeave(uniqueId)}
                 >
-                  {/* --- CHANGED: Heights --- */}
-                  {/* h-[360px] -> h-[450px] | sm:h-[420px] -> sm:h-[520px] | md:h-[500px] -> md:h-[600px] */}
                   <div className="relative h-[450px] sm:h-[520px] md:h-[600px] overflow-hidden bg-neutral-200">
 
                     {/* Thumbnail */}
@@ -170,8 +166,7 @@ const Testimonials = () => {
 
                     {/* Center: Play + Name */}
                     <div className="absolute inset-0 flex flex-col items-center justify-center z-10 gap-5">
-                      
-                      {/* --- CHANGED: Play Button (Balanced Size) --- */}
+
                       <div
                         className={`
                           w-14 h-14 md:w-16 md:h-16 rounded-full
@@ -188,7 +183,6 @@ const Testimonials = () => {
                       </div>
 
                       <div className="text-center px-4">
-                        {/* --- CHANGED: Text Size (Balanced) --- */}
                         <h4 className="font-bold text-white font-heading uppercase text-base md:text-lg tracking-wide drop-shadow-lg">
                           {video.author}
                         </h4>
@@ -207,7 +201,6 @@ const Testimonials = () => {
 
         {/* --- Curve Overlays --- */}
         <div className="absolute inset-0 pointer-events-none z-20">
-          {/* Top Curve — Adjusted to h-12 md:h-24 for the 600px height */}
           <svg
             className="absolute -top-1 left-0 w-full h-12 md:h-24"
             preserveAspectRatio="none"
@@ -215,7 +208,6 @@ const Testimonials = () => {
           >
             <path fill="#ffffff" d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" />
           </svg>
-          {/* Bottom Curve */}
           <svg
             className="absolute -bottom-1 left-0 w-full h-12 md:h-24"
             preserveAspectRatio="none"

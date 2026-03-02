@@ -1,47 +1,245 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 const FinalCTA = () => {
-    return (
-        <section className="relative bg-primary py-24 md:py-40 overflow-hidden flex flex-col items-center text-center border-t border-mint/5">
-            {/* Layered Atmospheric Glows */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[1000px] md:h-[400px] bg-evergreen opacity-20 blur-[100px] md:blur-[150px] rounded-full pointer-events-none"></div>
-            <div className="absolute bottom-[-150px] left-1/2 -translate-x-1/2 w-[200px] h-[200px] md:w-[600px] md:h-[300px] bg-emerald opacity-10 blur-[80px] md:blur-[120px] rounded-full pointer-events-none"></div>
-            
-            <div className="max-w-5xl mx-auto px-6 relative z-10">
-                {/* Visual Hook */}
-                <span className="text-emerald text-[9px] md:text-[10px] font-black uppercase tracking-[0.3em] md:tracking-[0.5em] mb-4 md:mb-6 block font-heading">
-                    Available for Q2 2026 Projects
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    company: '',
+    budget: '',
+    message: '',
+  });
+
+  const [focused, setFocused] = useState(null);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
+  const budgetOptions = [
+    '$5k – $10k',
+    '$10k – $25k',
+    '$25k – $50k',
+    '$50k+',
+  ];
+
+  return (
+    // CHANGED: py-24 md:py-40 → pt-12 md:pt-20 pb-24 md:pb-40
+    <section className="relative bg-white pt-12 md:pt-20 pb-24 md:pb-40 overflow-hidden font-body">
+
+      {/* Subtle background accents */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald/[0.03] blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-mint/20 blur-[100px] rounded-full pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+
+        {/* Top section — headline + form side by side */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
+
+          {/* Left — Copy */}
+          <div className="flex flex-col justify-center">
+            <span className="text-emerald text-[10px] font-black uppercase tracking-[0.4em] mb-5 block font-heading">
+              Start a Project
+            </span>
+
+            <h2 className="text-4xl sm:text-5xl md:text-6xl font-black text-neutral-900 tracking-tighter uppercase leading-[0.95] font-heading mb-8">
+              Let's Build<br />
+              Something{' '}
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald to-teal-500 italic">
+                Electric.
+              </span>
+            </h2>
+
+            <p className="text-neutral-500 text-lg md:text-xl leading-relaxed mb-12 max-w-md">
+              Have a project in mind? Fill out the form and our team will get back to you within 24 hours.
+            </p>
+
+            {/* Quick info cards */}
+            <div className="space-y-5">
+              {[
+                { label: 'Email', value: 'hello@plasma.studio', icon: '✉' },
+                { label: 'Based in', value: 'Available Worldwide', icon: '◎' },
+                { label: 'Availability', value: 'Q2 2026 — Open', icon: '◈' },
+              ].map((item) => (
+                <div key={item.label} className="flex items-center gap-4">
+                  <div className="w-10 h-10 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center text-emerald text-sm">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <p className="text-[11px] text-neutral-400 uppercase tracking-widest font-heading font-bold">
+                      {item.label}
+                    </p>
+                    <p className="text-neutral-900 text-sm font-medium">
+                      {item.value}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right — Form */}
+          <div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+
+              {/* Name & Email row */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div className="relative">
+                  <label className="text-[11px] text-neutral-400 uppercase tracking-widest font-heading font-bold mb-2 block">
+                    Your Name *
+                  </label>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    onFocus={() => setFocused('name')}
+                    onBlur={() => setFocused(null)}
+                    placeholder="John Doe"
+                    className={`
+                      w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                      placeholder:text-neutral-300 outline-none transition-all duration-300
+                      ${focused === 'name' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
+                    `}
+                  />
+                </div>
+
+                <div className="relative">
+                  <label className="text-[11px] text-neutral-400 uppercase tracking-widest font-heading font-bold mb-2 block">
+                    Email *
+                  </label>
+                  <input
+                    type="email"
+                    name="email"
+                    required
+                    value={formData.email}
+                    onChange={handleChange}
+                    onFocus={() => setFocused('email')}
+                    onBlur={() => setFocused(null)}
+                    placeholder="john@company.com"
+                    className={`
+                      w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                      placeholder:text-neutral-300 outline-none transition-all duration-300
+                      ${focused === 'email' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
+                    `}
+                  />
+                </div>
+              </div>
+
+              {/* Company */}
+              <div>
+                <label className="text-[11px] text-neutral-400 uppercase tracking-widest font-heading font-bold mb-2 block">
+                  Company / Brand
+                </label>
+                <input
+                  type="text"
+                  name="company"
+                  value={formData.company}
+                  onChange={handleChange}
+                  onFocus={() => setFocused('company')}
+                  onBlur={() => setFocused(null)}
+                  placeholder="Acme Inc."
+                  className={`
+                    w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                    placeholder:text-neutral-300 outline-none transition-all duration-300
+                    ${focused === 'company' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
+                  `}
+                />
+              </div>
+
+              {/* Budget selector */}
+              <div>
+                <label className="text-[11px] text-neutral-400 uppercase tracking-widest font-heading font-bold mb-3 block">
+                  Project Budget
+                </label>
+                <div className="flex flex-wrap gap-2">
+                  {budgetOptions.map((option) => (
+                    <button
+                      key={option}
+                      type="button"
+                      onClick={() => setFormData({ ...formData, budget: option })}
+                      className={`
+                        px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider
+                        transition-all duration-300 border
+                        ${formData.budget === option
+                          ? 'bg-emerald text-white border-emerald shadow-[0_4px_12px_rgba(80,200,120,0.3)]'
+                          : 'bg-neutral-50 text-neutral-500 border-neutral-200 hover:border-neutral-300 hover:text-neutral-700'
+                        }
+                      `}
+                    >
+                      {option}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Message */}
+              <div>
+                <label className="text-[11px] text-neutral-400 uppercase tracking-widest font-heading font-bold mb-2 block">
+                  Tell us about your project *
+                </label>
+                <textarea
+                  name="message"
+                  required
+                  rows={5}
+                  value={formData.message}
+                  onChange={handleChange}
+                  onFocus={() => setFocused('message')}
+                  onBlur={() => setFocused(null)}
+                  placeholder="We're looking to build a..."
+                  className={`
+                    w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                    placeholder:text-neutral-300 outline-none transition-all duration-300 resize-none
+                    ${focused === 'message' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
+                  `}
+                />
+              </div>
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="
+                  group relative w-full px-8 py-5 bg-neutral-900 text-white font-black text-sm uppercase tracking-[0.15em]
+                  rounded-xl overflow-hidden transition-all duration-300
+                  hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)]
+                  active:scale-[0.98] font-heading
+                "
+              >
+                <span className="relative z-10 flex items-center justify-center gap-3">
+                  Send Message
+                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                  </svg>
                 </span>
 
-                <h2 className="text-4xl sm:text-6xl md:text-8xl font-black text-text-primary mb-8 md:mb-10 leading-[0.9] tracking-tighter uppercase italic font-heading">
-                    READY TO LIGHT <br/>
-                    THE <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald via-mint to-emerald drop-shadow-[0_0_35px_rgba(80,200,120,0.5)]">PLASMA?</span>
-                </h2>
+                {/* Hover fill */}
+                <div className="absolute inset-0 bg-emerald translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+              </button>
 
-                <p className="text-text-secondary text-lg md:text-xl md:text-2xl mb-12 md:mb-16 max-w-2xl mx-auto leading-relaxed font-body">
-                    Stop waiting for the "right time." Build the high-performance platform your business deserves <span className="text-text-primary">today.</span>
-                </p>
-                
-                {/* The "Mjölnir" Button */}
-                <button className="group relative px-16 py-7 bg-emerald text-black font-black text-xl rounded-xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_60px_rgba(80,200,120,0.3)] font-heading">
-                    <span className="relative z-10 tracking-[0.1em]">WORK WITH US</span>
-                    
-                    {/* High-Voltage Hover Effect */}
-                    <div className="absolute inset-0 bg-mint translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></div>
-                    
-                    {/* Animated Edge Light */}
-                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-mint/50 rounded-xl transition-all duration-500"></div>
-                </button>
-            </div>
+              <p className="text-center text-[11px] text-neutral-400 mt-2">
+                We'll respond within 24 hours. No spam, ever.
+              </p>
 
-            {/* Subtle Tech-Detail */}
-            <div className="mt-20 flex items-center gap-4 opacity-20">
-                <div className="h-[1px] w-12 bg-text-secondary"></div>
-                <span className="text-[10px] text-text-secondary font-mono uppercase tracking-widest">Connect to Server</span>
-                <div className="h-[1px] w-12 bg-text-secondary"></div>
-            </div>
-        </section>
-    );
+            </form>
+          </div>
+
+        </div>
+
+        {/* Bottom divider detail */}
+        <div className="mt-24 flex items-center justify-center gap-4 opacity-30">
+          <div className="h-[1px] w-12 bg-neutral-300" />
+          <span className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest">Let's Connect</span>
+          <div className="h-[1px] w-12 bg-neutral-300" />
+        </div>
+
+      </div>
+    </section>
+  );
 };
 
 export default FinalCTA;
