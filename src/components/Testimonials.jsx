@@ -183,10 +183,10 @@ const Testimonials = () => {
                       </div>
 
                       <div className="text-center px-4">
-                        <h4 className="font-bold text-white font-heading uppercase text-base md:text-lg tracking-wide drop-shadow-lg">
+                        <h4 className="font-bold text-emerald font-heading uppercase text-base md:text-lg tracking-wide drop-shadow-lg">
                           {video.author}
                         </h4>
-                        <p className="text-xs text-white/70 mt-1 drop-shadow-md">
+                        <p className="text-xs text-evergreen mt-1 drop-shadow-md">
                           {video.role}
                         </p>
                       </div>

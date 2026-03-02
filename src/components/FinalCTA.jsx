@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import emailjs from '@emailjs/browser';
 
 const FinalCTA = () => {
   const [formData, setFormData] = useState({
@@ -10,22 +11,76 @@ const FinalCTA = () => {
   });
 
   const [focused, setFocused] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success' or 'error'
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-  };
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+
+    try {
+      const SERVICE_ID = 'service_gt51qen';
+      const TEMPLATE_ID = 'template_93q44pl';       // Main email (to you)
+      const AUTO_REPLY_TEMPLATE_ID = 'template_9w1ae4l'; // Auto reply (to client)
+      const PUBLIC_KEY = 'XokZQ_9fj51aMNjVI';
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        company: formData.company,
+        budget: formData.budget,
+        message: formData.message,
+      };
+
+      // 1️⃣ Send email to you
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY
+      );
+
+      // 2️⃣ Send auto reply to client
+      try {
+        await emailjs.send(
+          SERVICE_ID,
+          AUTO_REPLY_TEMPLATE_ID,
+          templateParams,
+          PUBLIC_KEY
+        );
+      } catch (autoReplyError) {
+        console.log("Auto reply failed, but main email sent.");
+      }
+
+      setSubmitStatus('success');
+
+      setFormData({
+        name: '',
+        email: '',
+        company: '',
+        budget: '',
+        message: '',
+      });
+
+    } catch (error) {
+      console.error('FAILED...', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  }
 
   const budgetOptions = [
-    '$5k – $10k',
-    '$10k – $25k',
-    '$25k – $50k',
-    '$50k+',
-  ];
+  '₹15K – ₹25K',
+  '₹25K – ₹50K',
+  '₹50K – ₹75K',
+  '₹75K+',
+] ;
 
   return (
     // CHANGED: py-24 md:py-40 → pt-12 md:pt-20 pb-24 md:pb-40
@@ -203,23 +258,38 @@ const FinalCTA = () => {
               {/* Submit */}
               <button
                 type="submit"
-                className="
+                disabled={isSubmitting}
+                className={`
                   group relative w-full px-8 py-5 bg-neutral-900 text-white font-black text-sm uppercase tracking-[0.15em]
                   rounded-xl overflow-hidden transition-all duration-300
-                  hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)]
-                  active:scale-[0.98] font-heading
-                "
+                  font-heading
+                  ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] active:scale-[0.98]'}
+                `}
               >
                 <span className="relative z-10 flex items-center justify-center gap-3">
-                  Send Message
-                  <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
-                  </svg>
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  {!isSubmitting && (
+                    <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" strokeWidth={2.5} viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                    </svg>
+                  )}
                 </span>
 
                 {/* Hover fill */}
-                <div className="absolute inset-0 bg-emerald translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                {!isSubmitting && <div className="absolute inset-0 bg-emerald translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />}
               </button>
+
+              {submitStatus === 'success' && (
+                <p className="text-center text-emerald text-sm font-medium mt-4">
+                  Message sent successfully! We'll be in touch soon.
+                </p>
+              )}
+              
+              {submitStatus === 'error' && (
+                <p className="text-center text-red-500 text-sm font-medium mt-4">
+                  Failed to send message. Please try again later.
+                </p>
+              )}
 
               <p className="text-center text-[11px] text-neutral-400 mt-2">
                 We'll respond within 24 hours. No spam, ever.
