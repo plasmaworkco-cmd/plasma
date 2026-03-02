@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
+import { motion } from 'framer-motion';
 
 const FinalCTA = () => {
   const [formData, setFormData] = useState({
@@ -97,7 +98,13 @@ const FinalCTA = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24">
 
           {/* Left — Copy */}
-          <div className="flex flex-col justify-center">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col justify-center"
+          >
             <span className="text-emerald text-[10px] font-black uppercase tracking-[0.4em] mb-5 block font-heading">
               Start a Project
             </span>
@@ -136,10 +143,15 @@ const FinalCTA = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
           {/* Right — Form */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          >
             <form onSubmit={handleSubmit} className="space-y-6">
 
               {/* Name & Email row */}
@@ -297,16 +309,22 @@ const FinalCTA = () => {
               </p>
 
             </form>
-          </div>
+          </motion.div>
 
         </div>
 
         {/* Bottom divider detail */}
-        <div className="mt-24 flex items-center justify-center gap-4 opacity-30">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 0.3, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+          className="mt-24 flex items-center justify-center gap-4"
+        >
           <div className="h-[1px] w-12 bg-neutral-300" />
           <span className="text-[10px] text-neutral-400 font-mono uppercase tracking-widest">Let's Connect</span>
           <div className="h-[1px] w-12 bg-neutral-300" />
-        </div>
+        </motion.div>
 
       </div>
     </section>

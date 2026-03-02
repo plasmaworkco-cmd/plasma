@@ -1,30 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, useInView } from 'framer-motion';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
   const footerRef = useRef(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const isVisible = useInView(footerRef, { once: true, amount: 0.1 });
   const [hoveredLink, setHoveredLink] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const bigTextRef = useRef(null);
-
-  // Intersection observer for entrance animation
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    if (footerRef.current) {
-      observer.observe(footerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
 
   // Mouse tracking for the big text gradient reveal
   useEffect(() => {
@@ -186,139 +169,155 @@ const Footer = () => {
 
       {/* ====== DIVIDER ====== */}
       <div className="max-w-[95%] mx-auto relative z-10">
-        <div className="h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent transition-all duration-1000" style={{ opacity: isVisible ? 1 : 0, transitionDelay: '800ms' }} />
+        <motion.div 
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.8 }}
+          className="h-[1px] bg-gradient-to-r from-transparent via-neutral-800 to-transparent" 
+        />
       </div>
 
       {/* ====== LINKS GRID ====== */}
       <div className="max-w-[95%] mx-auto px-6 py-16 md:py-24 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
+  
+  {/* --- 1. MOVED LOGO OUTSIDE THE GRID --- */}
+  {/* This ensures it doesn't push the Navigation column down relative to others */}
+  <motion.div
+    initial={{ opacity: 0, y: 20 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    transition={{ duration: 0.7, delay: 0.8 }}
+    className="mb-12 md:mb-16"
+  >
+    <h3 className="text-4xl font-black text-white tracking-tighter font-heading">
+      PLASMA<span className="text-emerald-500">.</span>
+    </h3>
+  </motion.div>
 
-          {/* Navigation Column - ADDED LOGO HERE */}
-          <div
-            className="md:col-span-4 transition-all duration-700"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-              transitionDelay: '900ms',
-            }}
-          >
-            {/* --- ADDED: PLASMA LOGO --- */}
-            <h3 className="text-4xl font-black text-white mb-12 tracking-tighter font-heading">
-              PLASMA<span className="text-emerald-500">.</span>
-            </h3>
+  {/* --- 2. GRID CONTAINER --- */}
+  <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
 
-            <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
-              Navigation
-            </h4>
-            <ul className="space-y-2">
-              {navLinks.map((link) => (
-                <li key={link.label} className="overflow-hidden">
-                  <MagneticLink href={link.href} onHoverName={link.label}>
-                    <span className={`text-2xl md:text-3xl font-black uppercase tracking-tight font-heading transition-colors duration-300 block py-1 ${hoveredLink === link.label ? 'text-emerald-400' : 'text-neutral-400'}`}>
-                      {link.label}
-                    </span>
-                  </MagneticLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Legal + Info */}
-          <div
-            className="md:col-span-3 transition-all duration-700 flex flex-col justify-end"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-              transitionDelay: '1050ms',
-            }}
-          >
-            <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
-              Legal
-            </h4>
-            <ul className="space-y-4">
-              {legalLinks.map((link) => (
-                <li key={link.label}>
-                  <a href={link.href} className="text-neutral-500 hover:text-white text-sm font-medium transition-colors duration-300 font-body group flex items-center gap-2">
-                    <span className="w-0 group-hover:w-3 h-[1px] bg-emerald-500 transition-all duration-300" />
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-
-            {/* Status */}
-            <div className="mt-10 flex items-center gap-3">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+    {/* Navigation Column */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 0.9 }}
+      className="md:col-span-4" 
+    >
+      <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
+        Navigation
+      </h4>
+      <ul className="space-y-2">
+        {navLinks.map((link) => (
+          <li key={link.label} className="overflow-hidden">
+            <MagneticLink href={link.href} onHoverName={link.label}>
+              <span className={`text-2xl md:text-3xl font-black uppercase tracking-tight font-heading transition-colors duration-300 block py-1 ${hoveredLink === link.label ? 'text-emerald-400' : 'text-neutral-400'}`}>
+                {link.label}
               </span>
-              <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-500 font-bold font-heading">
-                Available for Projects
-              </span>
-            </div>
-          </div>
+            </MagneticLink>
+          </li>
+        ))}
+      </ul>
+    </motion.div>
 
-          {/* Contact + Socials */}
-          <div
-            className="md:col-span-3 transition-all duration-700 flex flex-col justify-end"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-              transitionDelay: '1200ms',
-            }}
-          >
-            <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
-              Get in Touch
-            </h4>
-            <a href="mailto:hello@plasma.studio" className="text-white text-lg font-semibold hover:text-emerald-400 transition-colors duration-300 font-body block mb-2">
-              plasma.work.co@gmail.com
+    {/* Legal + Info */}
+    {/* Removed 'justify-end' so it aligns to top */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 1.05 }}
+      className="md:col-span-3 flex flex-col" 
+    >
+      <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
+        Legal
+      </h4>
+      <ul className="space-y-4">
+        {legalLinks.map((link) => (
+          <li key={link.label}>
+            <a href={link.href} className="text-neutral-500 hover:text-white text-sm font-medium transition-colors duration-300 font-body group flex items-center gap-2">
+              <span className="w-0 group-hover:w-3 h-[1px] bg-emerald-500 transition-all duration-300" />
+              {link.label}
             </a>
-            <p className="text-neutral-600 text-sm font-body mb-8">
-              Nashik, Maharashtra, IN
-            </p>
+          </li>
+        ))}
+      </ul>
 
-            <div className="flex gap-3">
-              {socials.map((social) => (
-                <a key={social.name} href={social.href} className="group w-11 h-11 rounded-full border border-neutral-800 flex items-center justify-center transition-all duration-300 hover:border-emerald-500 hover:bg-emerald-500 relative overflow-hidden">
-                  <svg className="w-4 h-4 text-neutral-500 group-hover:text-neutral-950 relative z-10 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
-                    <path d={social.path} />
-                  </svg>
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* CTA column */}
-          <div
-            className="md:col-span-2 flex flex-col justify-between transition-all duration-700"
-            style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'translateY(0)' : 'translateY(40px)',
-              transitionDelay: '1350ms',
-            }}
-          >
-            <div>
-              <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
-                Start
-              </h4>
-              <a href="#contact" className="group inline-flex items-center gap-3 text-white font-bold text-sm uppercase tracking-wider font-heading hover:text-emerald-400 transition-colors duration-300">
-                <span>Start a Project</span>
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
-                </svg>
-              </a>
-            </div>
-
-            {/* Back to top */}
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="group mt-12 w-11 h-11 rounded-full border border-neutral-800 flex items-center justify-center transition-all duration-300 hover:border-emerald-500 hover:bg-emerald-500">
-              <svg className="w-4 h-4 text-neutral-500 group-hover:text-neutral-950 transition-all duration-300 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
-              </svg>
-            </button>
-          </div>
-
-        </div>
+      {/* Status - Added mt-auto to push it down if you want it at bottom, or keep margin-top fixed */}
+      <div className="mt-10 flex items-center gap-3">
+        <span className="relative flex h-2 w-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75" />
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+        </span>
+        <span className="text-[10px] uppercase tracking-[0.3em] text-emerald-500 font-bold font-heading">
+          Available for Projects
+        </span>
       </div>
+    </motion.div>
+
+    {/* Contact + Socials */}
+    {/* Removed 'justify-end' so it aligns to top */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 1.2 }}
+      className="md:col-span-3 flex flex-col"
+    >
+      <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
+        Get in Touch
+      </h4>
+      <a href="mailto:hello@plasma.studio" className="text-white text-lg font-semibold hover:text-emerald-400 transition-colors duration-300 font-body block mb-2">
+        plasma.work.co@gmail.com
+      </a>
+      <p className="text-neutral-600 text-sm font-body mb-8">
+        Nashik, Maharashtra, IN
+      </p>
+
+      <div className="flex gap-3">
+        {socials.map((social) => (
+          <a key={social.name} href={social.href} className="group w-11 h-11 rounded-full border border-neutral-800 flex items-center justify-center transition-all duration-300 hover:border-emerald-500 hover:bg-emerald-500 relative overflow-hidden">
+            <svg className="w-4 h-4 text-neutral-500 group-hover:text-neutral-950 relative z-10 transition-colors duration-300" fill="currentColor" viewBox="0 0 24 24">
+              <path d={social.path} />
+            </svg>
+          </a>
+        ))}
+      </div>
+    </motion.div>
+
+    {/* CTA column */}
+    {/* Kept justify-between so the button stays at the bottom, but header stays at top */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.7, delay: 1.35 }}
+      className="md:col-span-2 flex flex-col h-full justify-between"
+    >
+      <div>
+        <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">
+          Start
+        </h4>
+        <a href="#contact" className="group inline-flex items-center gap-3 text-white font-bold text-sm uppercase tracking-wider font-heading hover:text-emerald-400 transition-colors duration-300">
+          <span>Start a Project</span>
+          <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />
+          </svg>
+        </a>
+      </div>
+
+      {/* Back to top */}
+      <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="group mt-12 w-11 h-11 rounded-full border border-neutral-800 flex items-center justify-center transition-all duration-300 hover:border-emerald-500 hover:bg-emerald-500">
+        <svg className="w-4 h-4 text-neutral-500 group-hover:text-neutral-950 transition-all duration-300 group-hover:-translate-y-0.5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" d="M5 15l7-7 7 7" />
+        </svg>
+      </button>
+    </motion.div>
+
+  </div>
+</div>
 
       {/* ====== BOTTOM BAR ====== */}
       <div className="max-w-[95%] mx-auto relative z-10">

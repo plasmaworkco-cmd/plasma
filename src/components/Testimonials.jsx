@@ -1,6 +1,7 @@
 //size medium-large
 //size medium-large
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { motion } from 'framer-motion';
 
 const Testimonials = () => {
   const trackRef = useRef(null);
@@ -105,7 +106,13 @@ const Testimonials = () => {
     <section className="bg-white pt-24 md:pt-40 pb-10 md:pb-16 relative overflow-hidden font-body">
 
       {/* --- Header --- */}
-      <div className="max-w-7xl mx-auto px-6 mb-16 relative z-10 text-center">
+      <motion.div 
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="max-w-7xl mx-auto px-6 mb-16 relative z-10 text-center"
+      >
         <span className="text-emerald text-[10px] font-black uppercase tracking-[0.4em] mb-4 block font-heading">
           Validation Matrix
         </span>
@@ -115,10 +122,16 @@ const Testimonials = () => {
             Stories.
           </span>
         </h2>
-      </div>
+      </motion.div>
 
       {/* --- Carousel --- */}
-      <div className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, margin: "-100px" }}
+        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+        className="relative w-screen left-1/2 -translate-x-1/2 overflow-hidden"
+      >
 
         <div className="relative overflow-hidden">
           <div
@@ -217,7 +230,7 @@ const Testimonials = () => {
           </svg>
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 };
