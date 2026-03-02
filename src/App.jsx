@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
+import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import SocialProof from './components/SocialProof';
@@ -13,24 +14,32 @@ import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
 
 function App() {
+  const [loading, setLoading] = useState(true);
+
   return (
     <ThemeProvider>
-      <div className="bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased pb-24 md:pb-0 font-body transition-colors duration-300">
-        <Navbar />
-        
-        <main>
-        <Hero />
-        <SocialProof />
-        <Services />
-        <WhyChooseUs />
-        <FeaturedWork />
-        <Process />
-        <Technologies />
-        <Testimonials />
-        <FinalCTA />
-      </main>
+      {loading && <Loader onFinish={() => setLoading(false)} />}
 
-      <Footer />
+      <div
+        className={`bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased pb-24 md:pb-0 font-body transition-all duration-700 ${
+          loading ? 'opacity-0' : 'opacity-100'
+        }`}
+      >
+        <Navbar loading={loading} />
+
+        <main>
+          <Hero />
+          <SocialProof />
+          <Services />
+          <WhyChooseUs />
+          <FeaturedWork />
+          <Process />
+          <Technologies />
+          <Testimonials />
+          <FinalCTA />
+        </main>
+
+        <Footer />
       </div>
     </ThemeProvider>
   );
