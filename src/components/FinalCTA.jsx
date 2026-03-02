@@ -84,7 +84,8 @@ const FinalCTA = () => {
 
   return (
     // CHANGED: py-24 md:py-40 → pt-12 md:pt-20 pb-24 md:pb-40
-    <section className="relative bg-white pt-12 md:pt-20 pb-24 md:pb-40 overflow-hidden font-body">
+    <section id='contact'
+    className="relative bg-white pt-12 md:pt-20 pb-24 md:pb-40 overflow-hidden font-body">
 
       {/* Subtle background accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-emerald/[0.03] blur-[120px] rounded-full pointer-events-none" />
@@ -116,9 +117,9 @@ const FinalCTA = () => {
             {/* Quick info cards */}
             <div className="space-y-5">
               {[
-                { label: 'Email', value: 'hello@plasma.studio', icon: '✉' },
+                { label: 'Email', value: 'plasma.work.co@gmail.com', icon: '✉' },
                 { label: 'Based in', value: 'Available Worldwide', icon: '◎' },
-                { label: 'Availability', value: 'Q2 2026 — Open', icon: '◈' },
+                { label: 'Availability', value: '24 Hrs', icon: '◈' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-4">
                   <div className="w-10 h-10 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center text-emerald text-sm">
