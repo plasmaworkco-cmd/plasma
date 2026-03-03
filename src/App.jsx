@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ThemeProvider } from './context/ThemeContext';
+import ClickSpark from './components/ClickSpark'
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -18,29 +19,34 @@ function App() {
 
   return (
     <ThemeProvider>
-      {loading && <Loader onFinish={() => setLoading(false)} />}
-
-      <div
-        className={`bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased pb-24 md:pb-0 font-body transition-all duration-700 ${
-          loading ? 'opacity-0' : 'opacity-100'
-        }`}
+      <ClickSpark
+        sparkColor="#50C878"
+        sparkSize={10}
+        sparkRadius={15}
+        sparkCount={8}
+        duration={400}
       >
-        <Navbar loading={loading} />
-
-        <main>
-          <Hero />
-          <SocialProof />
-          <Services />
-          <WhyChooseUs />
-          <FeaturedWork />
-          <Process />
-          <Technologies />
-          <Testimonials />
-          <FinalCTA />
-        </main>
-
-        <Footer />
-      </div>
+        {loading && <Loader onFinish={() => setLoading(false)} />}
+        <div
+          className={`bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased pb-24 md:pb-0 font-body transition-all duration-700 ${
+            loading ? 'opacity-0' : 'opacity-100'
+          }`}
+        >
+          <Navbar loading={loading} />
+          <main>
+            <Hero />
+            <SocialProof />
+            <Services />
+            <WhyChooseUs />
+            <FeaturedWork />
+            <Process />
+            <Technologies />
+            <Testimonials />
+            <FinalCTA />
+          </main>
+          <Footer />
+        </div>
+      </ClickSpark>
     </ThemeProvider>
   );
 }
