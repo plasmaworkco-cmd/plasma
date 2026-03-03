@@ -19,6 +19,14 @@ const Navbar = ({ loading }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Logo style: invisible while loader is active, fades in as loader logo reaches this position.
+  // The 350ms delay + 350ms fade mirrors the loader's opacity transition timing (opacity fades
+  // out over 350ms starting at 400ms into the fly — so navbar logo starts appearing at ~400ms).
+  const logoStyle = {
+    opacity: loading ? 0 : 1,
+    transition: loading ? 'none' : 'opacity 350ms ease 0ms',
+  };
+
   return (
     <>
       {/* --- Desktop Floating Island Navbar --- */}
@@ -38,16 +46,18 @@ const Navbar = ({ loading }) => {
             boxShadow: scrolled ? '0 8px 30px rgba(0,0,0,0.04)' : 'none',
             border: scrolled ? '1px solid rgba(0,0,0,0.05)' : '1px solid transparent',
             padding: scrolled ? '12px 24px' : '16px 24px',
-            transition: 'max-width 500ms cubic-bezier(0.16,1,0.3,1), border-radius 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms cubic-bezier(0.16,1,0.3,1), border-color 500ms cubic-bezier(0.16,1,0.3,1), padding 500ms cubic-bezier(0.16,1,0.3,1)',
+            transition:
+              'max-width 500ms cubic-bezier(0.16,1,0.3,1), border-radius 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms cubic-bezier(0.16,1,0.3,1), border-color 500ms cubic-bezier(0.16,1,0.3,1), padding 500ms cubic-bezier(0.16,1,0.3,1)',
           }}
         >
           <div
-            className={`absolute inset-0 bg-secondary/80 backdrop-blur-xl transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+            className={`absolute inset-0 bg-secondary/80 backdrop-blur-xl transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
+              scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
             style={{ borderRadius: 'inherit' }}
           />
-          
+
           <div className="relative z-10 w-full grid grid-cols-3 items-center">
-            
             <div className="justify-self-start flex items-center gap-8">
               {['Solutions', 'The Stack', 'Work'].map((item) => (
                 <a
@@ -56,7 +66,7 @@ const Navbar = ({ loading }) => {
                   className="text-sm font-medium text-text-secondary hover:text-emerald transition-all relative group font-body tracking-wide"
                 >
                   {item}
-                  <span className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-emerald/80 transition-all duration-300 group-hover:w-full group-hover:left-0"></span>
+                  <span className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-emerald/80 transition-all duration-300 group-hover:w-full group-hover:left-0" />
                 </a>
               ))}
             </div>
@@ -65,7 +75,7 @@ const Navbar = ({ loading }) => {
               <span
                 data-navbar-logo
                 className="text-2xl font-black tracking-tighter text-text-primary font-heading"
-                style={{ opacity: loading ? 0 : 1 }}
+                style={logoStyle}
               >
                 PLASMA<span className="text-emerald group-hover:text-emerald/70 transition-colors duration-500">.</span>
               </span>
@@ -75,33 +85,29 @@ const Navbar = ({ loading }) => {
               <ThemeToggle />
               <button className="relative group overflow-hidden px-6 py-2.5 rounded-full bg-emerald text-secondary font-bold text-sm transition-all hover:shadow-[0_4px_20px_rgba(80,200,120,0.3)] hover:scale-105 active:scale-95 font-heading tracking-wide cursor-pointer border border-transparent">
                 <span className="relative z-10">Start a Project</span>
-                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <div className="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
               </button>
             </div>
-            
           </div>
         </div>
       </nav>
 
-      {/* --- Mobile Top Header — 3-column grid for true center logo --- */}
+      {/* --- Mobile Top Header --- */}
       <div
         className={`md:hidden fixed top-0 left-0 w-full z-40 px-4 py-4 grid grid-cols-3 items-center transition-[background-color,backdrop-filter,border-color] duration-300 ${
           scrolled ? 'bg-secondary/70 backdrop-blur-lg border-b border-black/5 shadow-sm' : 'bg-transparent'
         }`}
       >
-        {/* Left — empty spacer to balance the grid */}
         <div />
 
-        {/* Center — logo */}
         <span
           data-navbar-logo-mobile
           className="justify-self-center text-xl font-black tracking-tighter text-text-primary font-heading"
-          style={{ opacity: loading ? 0 : 1 }}
+          style={logoStyle}
         >
           PLASMA<span className="text-emerald">.</span>
         </span>
 
-        {/* Right — theme toggle */}
         <div className="justify-self-end">
           <ThemeToggle />
         </div>
