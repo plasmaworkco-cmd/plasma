@@ -129,7 +129,7 @@ const FinalCTA = () => {
                 { label: 'Availability', value: '24 Hrs', icon: '◈' },
               ].map((item) => (
                 <div key={item.label} className="flex items-center gap-4">
-                  <div className="w-10 h-10 rounded-xl bg-neutral-100 border border-neutral-200 flex items-center justify-center text-emerald text-sm">
+                  <div className="w-10 h-10 rounded-2xl bg-neutral-100 border border-neutral-200 flex items-center justify-center text-emerald text-sm">
                     {item.icon}
                   </div>
                   <div>
@@ -170,7 +170,7 @@ const FinalCTA = () => {
                     onBlur={() => setFocused(null)}
                     placeholder="John Doe"
                     className={`
-                      w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                      w-full px-5 py-4 rounded-lg bg-neutral-50 border text-neutral-900 text-sm
                       placeholder:text-neutral-300 outline-none transition-all duration-300
                       ${focused === 'name' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
                     `}
@@ -191,7 +191,7 @@ const FinalCTA = () => {
                     onBlur={() => setFocused(null)}
                     placeholder="john@company.com"
                     className={`
-                      w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                      w-full px-5 py-4 rounded-lg bg-neutral-50 border text-neutral-900 text-sm
                       placeholder:text-neutral-300 outline-none transition-all duration-300
                       ${focused === 'email' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
                     `}
@@ -213,7 +213,7 @@ const FinalCTA = () => {
                   onBlur={() => setFocused(null)}
                   placeholder="Acme Inc."
                   className={`
-                    w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                    w-full px-5 py-4 rounded-lg bg-neutral-50 border text-neutral-900 text-sm
                     placeholder:text-neutral-300 outline-none transition-all duration-300
                     ${focused === 'company' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
                   `}
@@ -261,7 +261,7 @@ const FinalCTA = () => {
                   onBlur={() => setFocused(null)}
                   placeholder="We're looking to build a..."
                   className={`
-                    w-full px-5 py-4 rounded-xl bg-neutral-50 border text-neutral-900 text-sm
+                    w-full px-5 py-4 rounded-lg bg-neutral-50 border text-neutral-900 text-sm
                     placeholder:text-neutral-300 outline-none transition-all duration-300 resize-none
                     ${focused === 'message' ? 'border-emerald shadow-[0_0_0_3px_rgba(80,200,120,0.1)]' : 'border-neutral-200 hover:border-neutral-300'}
                   `}
@@ -274,7 +274,7 @@ const FinalCTA = () => {
                 disabled={isSubmitting}
                 className={`
                   group relative w-full px-8 py-5 bg-neutral-900 text-white font-black text-sm uppercase tracking-[0.15em]
-                  rounded-xl overflow-hidden transition-all duration-300
+                  rounded-lg overflow-hidden transition-all duration-300
                   font-heading
                   ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] active:scale-[0.98]'}
                 `}

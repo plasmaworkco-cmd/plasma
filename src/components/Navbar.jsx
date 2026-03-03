@@ -19,9 +19,6 @@ const Navbar = ({ loading }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Logo style: invisible while loader is active, fades in as loader logo reaches this position.
-  // The 350ms delay + 350ms fade mirrors the loader's opacity transition timing (opacity fades
-  // out over 350ms starting at 400ms into the fly — so navbar logo starts appearing at ~400ms).
   const logoStyle = {
     opacity: loading ? 0 : 1,
     transition: loading ? 'none' : 'opacity 350ms ease 0ms',
@@ -50,11 +47,15 @@ const Navbar = ({ loading }) => {
               'max-width 500ms cubic-bezier(0.16,1,0.3,1), border-radius 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms cubic-bezier(0.16,1,0.3,1), border-color 500ms cubic-bezier(0.16,1,0.3,1), padding 500ms cubic-bezier(0.16,1,0.3,1)',
           }}
         >
+          {/* Transparent at top, white frosted when scrolled into pill */}
           <div
-            className={`absolute inset-0 bg-secondary/80 backdrop-blur-xl transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-              scrolled ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
-            style={{ borderRadius: 'inherit' }}
+            className="absolute inset-0 backdrop-blur-xl transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            style={{
+              borderRadius: 'inherit',
+              backgroundColor: 'rgba(255, 255, 255, 0.80)',
+              opacity: scrolled ? 1 : 0,
+              pointerEvents: 'none',
+            }}
           />
 
           <div className="relative z-10 w-full grid grid-cols-3 items-center">
@@ -95,11 +96,11 @@ const Navbar = ({ loading }) => {
       {/* --- Mobile Top Header --- */}
       <div
         className={`md:hidden fixed top-0 left-0 w-full z-40 px-4 py-4 grid grid-cols-3 items-center transition-[background-color,backdrop-filter,border-color] duration-300 ${
-          scrolled ? 'bg-secondary/70 backdrop-blur-lg border-b border-black/5 shadow-sm' : 'bg-transparent'
+          scrolled ? 'border-b border-black/5 shadow-sm' : 'bg-transparent'
         }`}
+        style={scrolled ? { backgroundColor: 'rgba(255,255,255,0.85)', backdropFilter: 'blur(16px)' } : {}}
       >
         <div />
-
         <span
           data-navbar-logo-mobile
           className="justify-self-center text-xl font-black tracking-tighter text-text-primary font-heading"
@@ -107,14 +108,16 @@ const Navbar = ({ loading }) => {
         >
           PLASMA<span className="text-emerald">.</span>
         </span>
-
         <div className="justify-self-end">
           <ThemeToggle />
         </div>
       </div>
 
       {/* Mobile Bottom Nav */}
-      <nav className="md:hidden fixed bottom-6 left-4 right-4 z-50 bg-secondary/65 backdrop-blur-xl border border-white/30 rounded-2xl p-2 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex justify-between items-center ring-1 ring-black/5">
+      <nav
+        className="md:hidden fixed bottom-6 left-4 right-4 z-50 backdrop-blur-xl border border-white/30 rounded-2xl p-2 shadow-[0_8px_32px_rgba(0,0,0,0.12)] flex justify-between items-center ring-1 ring-black/5"
+        style={{ backgroundColor: 'rgba(255,255,255,0.75)' }}
+      >
         <div className="flex gap-6 pl-4">
           {['Work', 'Stack'].map((item) => (
             <a

@@ -1,7 +1,10 @@
 //size medium-large
 //size medium-large
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+
 import { motion } from 'framer-motion';
+
+// import CurvedLoop from './CurvedLoop';
 
 const Testimonials = () => {
   const trackRef = useRef(null);
@@ -123,6 +126,8 @@ const Testimonials = () => {
           </span>
         </h2>
       </motion.div>
+      
+      
 
       {/* --- Carousel --- */}
       <motion.div 
@@ -221,6 +226,18 @@ const Testimonials = () => {
           >
             <path fill="#ffffff" d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" />
           </svg>
+
+          {/* Curved Header Loop */}
+          {/* <div className="absolute -top-1 left-0 w-full h-12 md:h-24 pointer-events-auto overflow-hidden group">
+            <CurvedLoop 
+               marqueeText="CLIENT STORIES • SUCCESS STORIES • WHAT OUR CLIENTS SAY • PROVEN RESULTS • " 
+               containerClassName="w-full h-full relative opacity-90 transition-opacity duration-300 group-hover:opacity-100"
+               className="fill-emerald text-[4rem] text-black"
+               customPath="M-100,-5 Q720,115 1540,-5"
+               speed={1.5}
+            />
+          </div> */}
+
           <svg
             className="absolute -bottom-1 left-0 w-full h-12 md:h-24"
             preserveAspectRatio="none"
