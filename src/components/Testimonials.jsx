@@ -1,10 +1,7 @@
 //size medium-large
-//size medium-large
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 import { motion } from 'framer-motion';
-
-// import CurvedLoop from './CurvedLoop';
 
 const Testimonials = () => {
   const trackRef = useRef(null);
@@ -105,8 +102,7 @@ const Testimonials = () => {
   };
 
   return (
-    // CHANGED: py-24 md:py-40 → pt-24 md:pt-40 pb-10 md:pb-16
-    <section className="bg-white pt-24 md:pt-40 pb-10 md:pb-16 relative overflow-hidden font-body">
+    <section className="bg-mint pt-24 md:pt-40 pb-10 md:pb-16 relative overflow-hidden font-body">
 
       {/* --- Header --- */}
       <motion.div 
@@ -126,8 +122,6 @@ const Testimonials = () => {
           </span>
         </h2>
       </motion.div>
-      
-      
 
       {/* --- Carousel --- */}
       <motion.div 
@@ -218,33 +212,41 @@ const Testimonials = () => {
         </div>
 
         {/* --- Curve Overlays --- */}
+        {/* 
+          FIX: On mobile the curves were visibly incomplete because:
+          1. The SVG container height was too short (h-12 = 48px), cutting off the arc
+          2. The viewBox arc depth didn't match the rendered height
+
+          Solution: Use a tall, fixed-pixel container with overflow-hidden removed,
+          position the SVGs with negative offsets so they bleed fully over the edge,
+          and use a deeper viewBox arc so the curve fully covers at all screen widths.
+        */}
         <div className="absolute inset-0 pointer-events-none z-20">
-          <svg
-            className="absolute -top-1 left-0 w-full h-12 md:h-24"
-            preserveAspectRatio="none"
-            viewBox="0 0 1440 120"
-          >
-            <path fill="#ffffff" d="M0,0 L0,0 Q720,120 1440,0 L1440,0 Z" />
-          </svg>
 
-          {/* Curved Header Loop */}
-          {/* <div className="absolute -top-1 left-0 w-full h-12 md:h-24 pointer-events-auto overflow-hidden group">
-            <CurvedLoop 
-               marqueeText="CLIENT STORIES • SUCCESS STORIES • WHAT OUR CLIENTS SAY • PROVEN RESULTS • " 
-               containerClassName="w-full h-full relative opacity-90 transition-opacity duration-300 group-hover:opacity-100"
-               className="fill-emerald text-[4rem] text-black"
-               customPath="M-100,-5 Q720,115 1540,-5"
-               speed={1.5}
-            />
-          </div> */}
+          {/* Top curve — sits above carousel, fully covers the seam */}
+          <div className="absolute top-0 left-0 w-full overflow-hidden leading-none" style={{ height: '80px' }}>
+            <svg
+              className="absolute top-0 left-0 w-full"
+              style={{ height: '80px' }}
+              preserveAspectRatio="none"
+              viewBox="0 0 1440 80"
+            >
+              <path fill="#ecf4e5" d="M0,0 Q720,80 1440,0 L1440,0 L0,0 Z" />
+            </svg>
+          </div>
 
-          <svg
-            className="absolute -bottom-1 left-0 w-full h-12 md:h-24"
-            preserveAspectRatio="none"
-            viewBox="0 0 1440 120"
-          >
-            <path fill="#ffffff" d="M0,120 L0,120 Q720,0 1440,120 L1440,120 Z" />
-          </svg>
+          {/* Bottom curve — sits below carousel, fully covers the seam */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none" style={{ height: '80px' }}>
+            <svg
+              className="absolute bottom-0 left-0 w-full"
+              style={{ height: '80px' }}
+              preserveAspectRatio="none"
+              viewBox="0 0 1440 80"
+            >
+              <path fill="#ecf4e5" d="M0,80 Q720,0 1440,80 L1440,80 L0,80 Z" />
+            </svg>
+          </div>
+
         </div>
 
       </motion.div>

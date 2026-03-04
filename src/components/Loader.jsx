@@ -87,7 +87,7 @@ const Loader = ({ onFinish }) => {
     >
       {/* Background overlay */}
       <div
-        className="absolute inset-0 bg-secondary"
+        className="absolute inset-0 bg-mint"
         style={{
           transition: 'opacity 500ms cubic-bezier(0.16,1,0.3,1)',
           opacity: exiting ? 0 : 1,

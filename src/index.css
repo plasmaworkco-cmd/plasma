@@ -21,7 +21,8 @@
   --color-emerald: #50C878;
   --color-evergreen: #013220;
   --color-royal-amethyst: #0B6E4F;
-  --color-mint: #D1F2EB;
+  /* --color-mint: #D1F2EB; */
+  --color-mint: #ecf4e5;
 
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Inter', sans-serif;
