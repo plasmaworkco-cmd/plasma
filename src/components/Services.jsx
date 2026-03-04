@@ -1,79 +1,185 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion';
 
-const Services = () => {
-  const services = [
-    {
-      title: "SaaS Architecture",
-      description: "We architect scalable cloud-native platforms. From complex logic to high-load backend engines using Node and Python.",
-      icon: (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
-        </svg>
-      )
-    },
-    {
-      title: "E-commerce Ecosystems",
-      description: "Conversion-optimized storefronts. We integrate advanced inventory, payments, and AI-driven personalized shopping experiences.",
-      icon: (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
-        </svg>
-      )
-    },
-    {
-      title: "Corporate Platforms",
-      description: "Digital headquarters for industry leaders. Stunning aesthetics fused with enterprise-grade security and performance.",
-      icon: (
-        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-6 h-6">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
-        </svg>
-      )
+const SERVICES = [
+  {
+    id: 'brand-identity',
+    number: '01',
+    title: 'Brand Identity',
+    description: 'Complete brand systems that capture your essence and stand out in market. From strategy to execution, we build identities that resonate and scale.',
+    categories: ['Logo Design', 'Visual Identity', 'Brand Guidelines', 'Positioning', 'Naming', 'Brand Strategy', 'Brand Packaging'],
+    image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    id: 'digital-design',
+    number: '02',
+    title: 'Digital Design',
+    description: 'Websites and digital experiences that convert. We design with purpose, creating user journeys that turn visitors into customers.',
+    categories: ['Web Design', 'Landing Pages', 'E-commerce', 'Email Design', 'Digital Campaigns', 'Microsites', 'Web Apps'],
+    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964&auto=format&fit=crop'
+  },
+  {
+    id: 'product-design',
+    number: '03',
+    title: 'Product Design',
+    description: 'UI/UX that makes complex products feel simple. We balance user needs with business goals to create experiences that just work.',
+    categories: ['User Interface', 'User Experience', 'Design Systems', 'Prototypes', 'Mobile Apps', 'SaaS Products', 'Dashboards'],
+    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop'
+  },
+  {
+    id: 'marketing-growth',
+    number: '04',
+    title: 'Marketing & Growth',
+    description: 'Strategic creative that drives results. From campaigns to pitch decks, we design materials that move your audience to action.',
+    categories: ['Campaign Creative', 'Social Media', 'Pitch Decks', 'Sales Materials', 'Reports', 'Infographics', 'Presentations'],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'
+  },
+  {
+    id: 'development',
+    number: '05',
+    title: 'Development',
+    description: 'Clean code that brings designs to life. Fast, responsive, and pixel-perfect across all devices.',
+    categories: ['Front-end', 'Webflow', 'Framer', 'React', 'Marketing Sites', 'Web Apps', 'CMS Integration', 'Performance'],
+    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop'
+  }
+];
+
+const ServiceSection = ({ service, index, setActiveId }) => {
+  const containerRef = useRef(null);
+  const isInView = useInView(containerRef, { margin: "-30% 0px -70% 0px" });
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
+
+  const rawImageY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
+  const rawTextY = useTransform(scrollYProgress, [0, 1], ["200px", "-200px"]);
+  const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
+  const rawOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+
+  const imageY = useSpring(rawImageY, springConfig);
+  const textY = useSpring(rawTextY, springConfig);
+  const scale = useSpring(rawScale, springConfig);
+  const opacity = useSpring(rawOpacity, springConfig);
+
+  useEffect(() => {
+    if (isInView) {
+      setActiveId(service.id);
     }
-  ];
+  }, [isInView, service.id, setActiveId]);
 
   return (
-    <section id="solutions" className="bg-secondary py-20 md:py-32 relative overflow-hidden">
-      {/* Background Radial Glow */}
-      <div className="absolute -top-24 -left-24 w-96 h-96 bg-evergreen opacity-20 blur-[120px] rounded-full pointer-events-none"></div>
+    <div
+      ref={containerRef}
+      id={service.id}
+      className="flex flex-col relative"
+    >
+      <div className="w-full aspect-[16/10] overflow-hidden bg-primary relative rounded-[2rem]">
+        <motion.div
+          style={{ y: imageY, scale }}
+          className="absolute inset-0 w-full h-[140%] -top-[20%]"
+        >
+          <img
+            src={service.image}
+            alt={service.title}
+            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-out"
+            referrerPolicy="no-referrer"
+          />
+        </motion.div>
+      </div>
 
+      <motion.div
+        style={{ y: textY, opacity }}
+        className="py-40 px-0 z-10"
+      >
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
+          <div className="md:col-span-7">
+            <div className="flex items-baseline gap-3 mb-8">
+              <span className="text-2xl font-medium text-text-secondary/40 font-heading">[{service.number}]</span>
+              <h2 className="text-4xl md:text-6xl font-bold tracking-tighter text-text-primary font-heading">{service.title}</h2>
+            </div>
+
+            <p className="text-xl text-text-secondary leading-relaxed max-w-xl font-body">
+              {service.description}
+            </p>
+          </div>
+
+          <div className="md:col-span-5">
+            <div className="flex flex-col gap-8">
+              <span className="text-[10px] uppercase tracking-widest text-text-secondary/30 font-bold font-heading">Categories</span>
+              <div className="flex flex-wrap gap-3">
+                {service.categories.map((cat) => (
+                  <span key={cat} className="px-4 py-2 border border-text-primary/10 text-[10px] uppercase tracking-widest text-text-secondary hover:bg-text-primary hover:text-primary hover:border-text-primary transition-all duration-300 cursor-default font-heading">
+                    {cat}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    </div>
+  );
+};
+
+const Services = () => {
+  const [activeId, setActiveId] = useState(SERVICES[0].id);
+
+  return (
+    <section id="solutions" className="bg-primary py-20 md:py-32 relative">
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <div className="mb-20 text-center md:text-left">
-          <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-text-primary mb-6 tracking-tighter font-heading">
-            THE SOLUTIONS <span className="text-emerald drop-shadow-[0_0_15px_rgba(80,200,120,0.3)]">MATRIX.</span>
+        <div className="mb-32">
+          <h2 className="text-6xl md:text-8xl lg:text-9xl font-black text-text-primary mb-12 tracking-tighter font-heading">
+            OUR <span className="text-emerald drop-shadow-[0_0_15px_rgba(80,200,120,0.3)]">SERVICES.</span>
           </h2>
-          <p className="text-text-secondary max-w-xl text-lg md:text-xl font-medium font-body">
-            We don't offer generic packages. We build specialized engines for high-impact business outcomes.
+          <p className="text-text-secondary max-w-2xl text-xl md:text-2xl font-medium font-body leading-relaxed">
+            Full-spectrum design capabilities under one roof. Whether you need a complete brand overhaul or ongoing creative support, we have the expertise to deliver.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {services.map((service, index) => (
-            <div key={index} className="group relative p-8 md:p-10 rounded-[2rem] bg-primary border border-mint/5 transition-all duration-700 hover:border-emerald/40 hover:-translate-y-3">
-              
-              {/* Icon Container with Pulsing Glow */}
-              <div className="relative w-16 h-16 mb-10 flex items-center justify-center">
-                <div className="absolute inset-0 bg-emerald opacity-10 blur-xl group-hover:opacity-30 transition-opacity"></div>
-                <div className="relative z-10 w-full h-full bg-secondary rounded-2xl border border-emerald/20 flex items-center justify-center text-emerald group-hover:scale-110 transition-transform duration-500">
-                  {service.icon}
-                </div>
-              </div>
+        <div className="flex flex-col lg:flex-row gap-20">
+          <aside className="hidden lg:block w-80 shrink-0">
+            <div className="sticky top-40 flex flex-col gap-4">
+              {SERVICES.map((service) => (
+                <button
+                  key={service.id}
+                  onClick={() => {
+                    const el = document.getElementById(service.id);
+                    if (el) {
+                      const offset = 80;
+                      const bodyRect = document.body.getBoundingClientRect().top;
+                      const elementRect = el.getBoundingClientRect().top;
+                      const elementPosition = elementRect - bodyRect;
+                      const offsetPosition = elementPosition - offset;
 
-              <h3 className="text-2xl font-black text-text-primary mb-4 tracking-tight font-heading">
-                {service.title}
-              </h3>
-              
-              <p className="text-text-secondary leading-relaxed mb-10 text-base group-hover:text-text-primary/80 transition-colors font-body">
-                {service.description}
-              </p>
-
-              <a href="#" className="inline-flex items-center gap-3 text-emerald font-black text-xs uppercase tracking-[0.2em] group-hover:gap-6 transition-all font-heading">
-                Analyze Solution <span className="text-lg">→</span>
-              </a>
-
-              {/* Decorative Corner Element */}
-              <div className="absolute top-6 right-6 w-2 h-2 rounded-full bg-mint/10 group-hover:bg-emerald transition-colors"></div>
+                      window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                      });
+                    }
+                  }}
+                  className={`text-left text-4xl font-bold tracking-tighter transition-all duration-700 ease-in-out font-heading ${activeId === service.id ? 'text-text-primary translate-x-2' : 'text-text-primary/20 hover:text-text-primary/40'
+                    }`}
+                >
+                  {service.title}
+                </button>
+              ))}
             </div>
-          ))}
+          </aside>
+
+          <div className="flex-1 space-y-0">
+            {SERVICES.map((service, index) => (
+              <ServiceSection
+                key={service.id}
+                service={service}
+                index={index}
+                setActiveId={setActiveId}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>
