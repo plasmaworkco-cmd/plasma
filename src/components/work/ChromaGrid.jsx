@@ -15,6 +15,8 @@ const ChromaGrid = ({ projects }) => {
         >
           <Link
             to={`/work/${project.slug}`}
+            data-cursor="View"
+            data-accent={project.accent}
             className="group relative block w-full h-full overflow-hidden rounded-3xl bg-secondary border border-mint/10 hover:border-emerald/40 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-500"
           >
             {/* Improved Image Visibility (Less Foggy) */}

@@ -7,6 +7,7 @@ import FeaturedWork from '../components/FeaturedWork';
 import Process from '../components/Process';
 import Technologies from '../components/Technologies';
 import Testimonials from '../components/Testimonials';
+import InsightsSection from '../components/blog/InsightsSection';
 import FinalCTA from '../components/FinalCTA';
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <Services />
       <WhyChooseUs />
       <FeaturedWork />
+      <InsightsSection />
       <Process />
       <Technologies />
       <Testimonials />

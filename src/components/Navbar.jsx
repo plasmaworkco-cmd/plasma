@@ -62,7 +62,7 @@ const Navbar = ({ loading }) => {
 
           <div className="relative z-10 w-full grid grid-cols-3 items-center">
             <div className="justify-self-start flex items-center gap-8">
-              {['Solutions', 'The Stack', 'Work'].map((item) => {
+              {['Solutions', 'The Stack', 'Work', 'Insights'].map((item) => {
                 const id = item.replace(' ', '-').toLowerCase();
                 return (
                   <a
@@ -128,7 +128,7 @@ const Navbar = ({ loading }) => {
         }}
       >
         <div className="flex gap-6 pl-4">
-          {['Work', 'Stack'].map((item) => (
+          {['Work', 'Stack', 'Insights'].map((item) => (
             <a
               key={item}
               href={location.pathname === '/' ? `#${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
