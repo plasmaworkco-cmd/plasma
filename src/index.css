@@ -9,35 +9,39 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Light Mode (Default) */
-  --color-primary: #F9FAFB;      /* Light Gray/White - Main Background */
-  --color-secondary: #FFFFFF;    /* White - Secondary Background */
-  --color-text-primary: #111827; /* Dark Gray - Main Text */
-  --color-text-secondary: #4B5563; /* Gray - Secondary Text */
+  --color-primary: #F9FAFB;
+  /* Light Gray/White - Main Background */
+  --color-secondary: #FFFFFF;
+  /* White - Secondary Background */
+  --color-text-primary: #111827;
+  /* Dark Gray - Main Text */
+  --color-text-secondary: #4B5563;
+  /* Gray - Secondary Text */
 
   --radius: 16px;
-
   /* Brand Colors (remain mostly constant but can be tweaked) */
   --color-emerald: #50C878;
   --color-evergreen: #013220;
-  --color-royal-amethyst: #0B6E4F;
   /* --color-mint: #D1F2EB; */
   --color-mint: #ecf4e5;
 
   --font-heading: 'Montserrat', sans-serif;
   --font-body: 'Inter', sans-serif;
-  
+
 }
 
 .dark {
   /* Dark Mode */
-  --color-primary: #0B0F14;      /* Deep Black */
-  --color-secondary: #121A22;    /* Secondary Black */
-  --color-text-primary: #E6EDF3; /* Light Text */
-  --color-text-secondary: #9AA4AF; /* Muted Text */
+  --color-primary: #0B0F14;
+  /* Deep Black */
+  --color-secondary: #121A22;
+  /* Secondary Black */
+  --color-text-primary: #E6EDF3;
+  /* Light Text */
+  --color-text-secondary: #9AA4AF;
+  /* Muted Text */
 
   --radius: 16px;
-
 }
 
 
@@ -106,7 +110,126 @@ body {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ── Hero Futuristic: word fade-in with glitch ── */
+@keyframes fadeInGlitch {
+  0% {
+    opacity: 0;
+    transform: translateY(18px) skewX(-6deg);
+    filter: blur(4px);
+  }
+
+  40% {
+    opacity: 0.7;
+    transform: translateY(-4px) skewX(2deg);
+    filter: blur(1px);
+  }
+
+  60% {
+    opacity: 0.9;
+    transform: translateY(2px) skewX(-1deg);
+    filter: blur(0px);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateY(-1px) skewX(0.5deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) skewX(0deg);
+    filter: blur(0px);
+  }
+}
+
+.fade-in {
+  animation: fadeInGlitch 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Hero Futuristic: subtitle fade-in ── */
+@keyframes fadeInSubtitle {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+    letter-spacing: 0.1em;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    letter-spacing: normal;
+  }
+}
+
+.fade-in-subtitle {
+  animation: fadeInSubtitle 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* ── Hero Futuristic: explore button ── */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.explore-btn {
+  position: absolute;
+  bottom: 2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--color-text-secondary);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  background: none;
+  border: none;
+  cursor: pointer;
+  pointer-events: auto;
+  white-space: nowrap;
+}
+
+
+.explore-btn:hover {
+  color: var(--color-text-primary);
+}
+
+/* ── Hero Futuristic: bouncing arrow ── */
+@keyframes bounceArrow {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+.explore-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrow-svg {
+  animation: bounceArrow 1.4s ease-in-out infinite;
 }

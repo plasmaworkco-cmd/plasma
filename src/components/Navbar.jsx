@@ -28,32 +28,24 @@ const Navbar = ({ loading }) => {
     <>
       {/* --- Desktop Floating Island Navbar --- */}
       <nav
-        className={`hidden md:flex fixed left-1/2 z-50 -translate-x-1/2 transition-[top] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          scrolled ? 'top-4' : 'top-8'
-        }`}
+        className={`hidden md:flex fixed left-1/2 z-50 -translate-x-1/2 transition-[top] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled ? 'top-4' : 'top-8'
+          }`}
         style={{ width: 'calc(100% - 3rem)', maxWidth: '90rem' }}
       >
         <div
-          className="w-full relative"
+          className={`w-full relative border transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${scrolled ? 'max-w-[60rem] rounded-full shadow-[0_8px_30px_rgba(0,0,0,0.04)] dark:shadow-none border-[#b4dcb459] dark:border-white/10 py-3 px-6' : 'max-w-[90rem] rounded-none shadow-none border-transparent py-4 px-6'
+            }`}
           style={{
             willChange: 'max-width, border-radius',
-            maxWidth: scrolled ? '60rem' : '90rem',
             margin: '0 auto',
-            borderRadius: scrolled ? '9999px' : '0px',
-            boxShadow: scrolled ? '0 8px 30px rgba(0,0,0,0.04)' : 'none',
-            border: scrolled ? '1px solid rgba(180,220,180,0.35)' : '1px solid transparent',
-            padding: scrolled ? '12px 24px' : '16px 24px',
-            transition:
-              'max-width 500ms cubic-bezier(0.16,1,0.3,1), border-radius 500ms cubic-bezier(0.16,1,0.3,1), box-shadow 500ms cubic-bezier(0.16,1,0.3,1), border-color 500ms cubic-bezier(0.16,1,0.3,1), padding 500ms cubic-bezier(0.16,1,0.3,1)',
           }}
         >
           {/* Mint-tinted frosted glass when scrolled into pill */}
           <div
-            className="absolute inset-0 backdrop-blur-xl transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className={`absolute inset-0 backdrop-blur-xl transition-opacity duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] bg-mint/90 dark:bg-secondary/90 ${scrolled ? 'opacity-100' : 'opacity-0'
+              }`}
             style={{
               borderRadius: 'inherit',
-              backgroundColor: 'rgba(236, 244, 229, 0.88)',
-              opacity: scrolled ? 1 : 0,
               pointerEvents: 'none',
             }}
           />
@@ -91,14 +83,13 @@ const Navbar = ({ loading }) => {
             </div>
           </div>
         </div>
-      </nav>
+      </nav >
 
       {/* --- Mobile Top Header --- */}
-      <div
-        className={`md:hidden fixed top-0 left-0 w-full z-40 px-4 py-4 grid grid-cols-3 items-center transition-[background-color,backdrop-filter,border-color] duration-300 ${
-          scrolled ? 'border-b border-black/5 shadow-sm' : 'bg-transparent'
-        }`}
-        style={scrolled ? { backgroundColor: 'rgba(236, 244, 229, 0.90)', backdropFilter: 'blur(16px)' } : {}}
+      < div
+        className={`md:hidden fixed top-0 left-0 w-full z-40 px-4 py-4 grid grid-cols-3 items-center transition-all duration-300 ${scrolled ? 'border-b border-black/5 dark:border-white/10 shadow-sm bg-mint/90 dark:bg-secondary/90 backdrop-blur-xl' : 'bg-transparent'
+          }`
+        }
       >
         <div />
         <span
@@ -111,15 +102,11 @@ const Navbar = ({ loading }) => {
         <div className="justify-self-end">
           <ThemeToggle />
         </div>
-      </div>
+      </div >
 
       {/* Mobile Bottom Nav */}
-      <nav
-        className="md:hidden fixed bottom-6 left-4 right-4 z-50 backdrop-blur-xl rounded-md p-2 shadow-[0_8px_32px_rgba(0,0,0,0.10)] flex justify-between items-center"
-        style={{
-          backgroundColor: 'rgba(236, 244, 229, 0.88)',
-          border: '1px solid rgba(180,220,180,0.40)',
-        }}
+      < nav
+        className="md:hidden fixed bottom-6 left-4 right-4 z-50 backdrop-blur-xl rounded-md p-2 shadow-[0_8px_32px_rgba(0,0,0,0.10)] flex justify-between items-center bg-mint/90 dark:bg-secondary/90 border border-[#b4dcb466] dark:border-white/20"
       >
         <div className="flex gap-6 pl-4">
           {['Work', 'Stack'].map((item) => (
@@ -135,7 +122,7 @@ const Navbar = ({ loading }) => {
         <button className="px-5 py-3 rounded-md bg-emerald text-secondary font-extrabold text-[10px] sm:text-xs font-heading tracking-widest uppercase shadow-lg shadow-emerald/20 active:scale-95 transition-transform cursor-pointer">
           Start Project
         </button>
-      </nav>
+      </nav >
     </>
   );
 };
