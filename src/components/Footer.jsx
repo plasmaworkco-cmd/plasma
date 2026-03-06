@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useInView } from 'framer-motion';
+import { useLocation } from 'react-router-dom';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -8,6 +9,7 @@ const Footer = () => {
   const [hoveredLink, setHoveredLink] = useState(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const bigTextRef = useRef(null);
+  const location = useLocation();
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -201,15 +203,19 @@ const Footer = () => {
           >
             <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">Navigation</h4>
             <ul className="space-y-2">
-              {navLinks.map((link) => (
-                <li key={link.label} className="overflow-hidden">
-                  <MagneticLink href={link.href} onHoverName={link.label}>
-                    <span className={`text-2xl md:text-3xl font-black uppercase tracking-tight font-heading transition-colors duration-200 block py-1 ${hoveredLink === link.label ? 'text-emerald-400' : 'text-neutral-400'}`}>
-                      {link.label}
-                    </span>
-                  </MagneticLink>
-                </li>
-              ))}
+              {navLinks.map((link) => {
+                const isHash = link.href.startsWith('#');
+                const finalHref = isHash && location.pathname !== '/' ? `/${link.href}` : link.href;
+                return (
+                  <li key={link.label} className="overflow-hidden">
+                    <MagneticLink href={finalHref} onHoverName={link.label}>
+                      <span className={`text-2xl md:text-3xl font-black uppercase tracking-tight font-heading transition-colors duration-200 block py-1 ${hoveredLink === link.label ? 'text-emerald-400' : 'text-neutral-400'}`}>
+                        {link.label}
+                      </span>
+                    </MagneticLink>
+                  </li>
+                );
+              })}
             </ul>
           </motion.div>
 
@@ -275,7 +281,10 @@ const Footer = () => {
           >
             <div>
               <h4 className="text-[10px] text-neutral-600 font-black uppercase tracking-[0.4em] mb-8 font-heading">Start</h4>
-              <a href="#contact" className="group inline-flex items-center gap-3 text-white font-bold text-sm uppercase tracking-wider font-heading hover:text-emerald-400 transition-colors duration-200">
+              <a 
+                href={location.pathname === '/' ? "#contact" : "/#contact"} 
+                className="group inline-flex items-center gap-3 text-white font-bold text-sm uppercase tracking-wider font-heading hover:text-emerald-400 transition-colors duration-200"
+              >
                 <span>Start a Project</span>
                 <svg className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M7 17L17 7M17 7H7M17 7v10" />

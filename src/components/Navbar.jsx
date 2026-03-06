@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 const Navbar = ({ loading }) => {
   const [scrolled, setScrolled] = useState(false);
+  const location = useLocation();
   const ticking = useRef(false);
 
   useEffect(() => {
@@ -60,19 +62,22 @@ const Navbar = ({ loading }) => {
 
           <div className="relative z-10 w-full grid grid-cols-3 items-center">
             <div className="justify-self-start flex items-center gap-8">
-              {['Solutions', 'The Stack', 'Work'].map((item) => (
-                <a
-                  key={item}
-                  href={`#${item.replace(' ', '-').toLowerCase()}`}
-                  className="text-sm font-medium text-text-secondary hover:text-emerald transition-all relative group font-body tracking-wide"
-                >
-                  {item}
-                  <span className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-emerald/80 transition-all duration-300 group-hover:w-full group-hover:left-0" />
-                </a>
-              ))}
+              {['Solutions', 'The Stack', 'Work'].map((item) => {
+                const id = item.replace(' ', '-').toLowerCase();
+                return (
+                  <a
+                    key={item}
+                    href={location.pathname === '/' ? `#${id}` : `/#${id}`}
+                    className="text-sm font-medium text-text-secondary hover:text-emerald transition-all relative group font-body tracking-wide"
+                  >
+                    {item}
+                    <span className="absolute -bottom-1 left-1/2 w-0 h-[2px] bg-emerald/80 transition-all duration-300 group-hover:w-full group-hover:left-0" />
+                  </a>
+                );
+              })}
             </div>
 
-            <div className="justify-self-center flex items-center gap-1 group cursor-pointer">
+            <Link to="/" className="justify-self-center flex items-center gap-1 group cursor-pointer">
               <span
                 data-navbar-logo
                 className="text-2xl font-black tracking-tighter text-text-primary font-heading"
@@ -80,7 +85,7 @@ const Navbar = ({ loading }) => {
               >
                 PLASMA<span className="text-emerald group-hover:text-emerald/70 transition-colors duration-500">.</span>
               </span>
-            </div>
+            </Link>
 
             <div className="justify-self-end flex items-center gap-4">
               <ThemeToggle />
@@ -101,13 +106,14 @@ const Navbar = ({ loading }) => {
         style={scrolled ? { backgroundColor: 'rgba(236, 244, 229, 0.90)', backdropFilter: 'blur(16px)' } : {}}
       >
         <div />
-        <span
+        <Link
+          to="/"
           data-navbar-logo-mobile
           className="justify-self-center text-xl font-black tracking-tighter text-text-primary font-heading"
           style={logoStyle}
         >
           PLASMA<span className="text-emerald">.</span>
-        </span>
+        </Link>
         <div className="justify-self-end">
           <ThemeToggle />
         </div>
@@ -125,7 +131,7 @@ const Navbar = ({ loading }) => {
           {['Work', 'Stack'].map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={location.pathname === '/' ? `#${item.toLowerCase()}` : `/#${item.toLowerCase()}`}
               className="text-sm font-bold text-text-secondary hover:text-text-primary transition-colors font-body"
             >
               {item}
