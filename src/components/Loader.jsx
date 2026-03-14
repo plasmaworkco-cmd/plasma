@@ -123,7 +123,7 @@ const Loader = ({ onFinish }) => {
         {letters.map((letter, i) => (
           <span
             key={i}
-            className="text-5xl sm:text-7xl font-black tracking-tighter text-text-primary font-heading transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className="text-5xl sm:text-7xl font-black tracking-tighter text-evergreen font-heading transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{
               opacity: i <= letterIndex ? 1 : 0,
               transform: i <= letterIndex ? 'translateY(0px)' : 'translateY(20px)',

@@ -34,7 +34,7 @@ function App() {
         >
           <Navbar loading={loading} />
           <main>
-            <Hero />
+            <Hero loading={loading} />
             <SocialProof />
             <Services />
             <WhyChooseUs />
