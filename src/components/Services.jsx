@@ -56,7 +56,7 @@ const ServiceSection = ({ service, index, setActiveId }) => {
   const springConfig = { stiffness: 100, damping: 30, restDelta: 0.001 };
 
   const rawImageY = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-  const rawTextY = useTransform(scrollYProgress, [0, 1], ["200px", "-200px"]);
+  const rawTextY = useTransform(scrollYProgress, [0, 1], ["100px", "-100px"]);
   const rawScale = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 1, 1.1]);
   const rawOpacity = useTransform(scrollYProgress, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
 
@@ -77,23 +77,18 @@ const ServiceSection = ({ service, index, setActiveId }) => {
       id={service.id}
       className="flex flex-col relative"
     >
-      <div className="w-full aspect-[16/10] overflow-hidden bg-primary relative rounded-[2rem]">
-        <motion.div
-          style={{ y: imageY, scale }}
-          className="absolute inset-0 w-full h-[140%] -top-[20%]"
-        >
+      <div className="w-full aspect-[16/10] overflow-hidden bg-primary relative rounded-[1rem]">
           <img
             src={service.image}
             alt={service.title}
             className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-out"
             referrerPolicy="no-referrer"
           />
-        </motion.div>
       </div>
 
       <motion.div
         style={{ y: textY, opacity }}
-        className="py-40 px-0 z-10"
+        className="py-25 px-0 z-10"
       >
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-7">
@@ -130,7 +125,7 @@ const Services = () => {
 
   return (
     <section id="solutions" className="bg-primary py-20 md:py-32 relative">
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-8xl mx-auto px-6 relative z-10">
         <div className="mb-32">
           <h2 className="text-6xl md:text-8xl lg:text-9xl font-black text-text-primary mb-12 tracking-tighter font-heading">
             OUR <span className="text-emerald drop-shadow-[0_0_15px_rgba(80,200,120,0.3)]">SERVICES.</span>
@@ -140,9 +135,9 @@ const Services = () => {
           </p>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-20">
-          <aside className="hidden lg:block w-80 shrink-0">
-            <div className="sticky top-40 flex flex-col gap-4">
+        <div className="flex flex-col lg:flex-row gap-5">
+          <aside className="hidden lg:block w-120 shrink-0">
+            <div className="sticky top-40 flex flex-col gap-6">
               {SERVICES.map((service) => (
                 <button
                   key={service.id}
