@@ -1,48 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, useInView, useScroll, useTransform, useSpring } from 'framer-motion';
-
-const SERVICES = [
-  {
-    id: 'brand-identity',
-    number: '01',
-    title: 'Brand Identity',
-    description: 'Complete brand systems that capture your essence and stand out in market. From strategy to execution, we build identities that resonate and scale.',
-    categories: ['Logo Design', 'Visual Identity', 'Brand Guidelines', 'Positioning', 'Naming', 'Brand Strategy', 'Brand Packaging'],
-    image: 'https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2070&auto=format&fit=crop'
-  },
-  {
-    id: 'digital-design',
-    number: '02',
-    title: 'Digital Design',
-    description: 'Websites and digital experiences that convert. We design with purpose, creating user journeys that turn visitors into customers.',
-    categories: ['Web Design', 'Landing Pages', 'E-commerce', 'Email Design', 'Digital Campaigns', 'Microsites', 'Web Apps'],
-    image: 'https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1964&auto=format&fit=crop'
-  },
-  {
-    id: 'product-design',
-    number: '03',
-    title: 'Product Design',
-    description: 'UI/UX that makes complex products feel simple. We balance user needs with business goals to create experiences that just work.',
-    categories: ['User Interface', 'User Experience', 'Design Systems', 'Prototypes', 'Mobile Apps', 'SaaS Products', 'Dashboards'],
-    image: 'https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?q=80&w=2070&auto=format&fit=crop'
-  },
-  {
-    id: 'marketing-growth',
-    number: '04',
-    title: 'Marketing & Growth',
-    description: 'Strategic creative that drives results. From campaigns to pitch decks, we design materials that move your audience to action.',
-    categories: ['Campaign Creative', 'Social Media', 'Pitch Decks', 'Sales Materials', 'Reports', 'Infographics', 'Presentations'],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop'
-  },
-  {
-    id: 'development',
-    number: '05',
-    title: 'Development',
-    description: 'Clean code that brings designs to life. Fast, responsive, and pixel-perfect across all devices.',
-    categories: ['Front-end', 'Webflow', 'Framer', 'React', 'Marketing Sites', 'Web Apps', 'CMS Integration', 'Performance'],
-    image: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=2072&auto=format&fit=crop'
-  }
-];
+import { Link, useNavigate } from 'react-router-dom';
+import { SERVICES } from '../data/services';
 
 const ServiceSection = ({ service, index, setActiveId }) => {
   const containerRef = useRef(null);
@@ -78,12 +37,12 @@ const ServiceSection = ({ service, index, setActiveId }) => {
       className="flex flex-col relative"
     >
       <div className="w-full aspect-[16/10] overflow-hidden bg-primary relative rounded-[1rem]">
-          <img
-            src={service.image}
-            alt={service.title}
-            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-out"
-            referrerPolicy="no-referrer"
-          />
+        <img
+          src={service.image}
+          alt={service.title}
+          className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 ease-out"
+          referrerPolicy="no-referrer"
+        />
       </div>
 
       <motion.div
@@ -107,10 +66,15 @@ const ServiceSection = ({ service, index, setActiveId }) => {
               <span className="text-[10px] uppercase tracking-widest text-text-secondary/30 font-bold font-heading">Categories</span>
               <div className="flex flex-wrap gap-3">
                 {service.categories.map((cat) => (
-                  <span key={cat} className="px-4 py-2 border border-text-primary/10 text-[10px] uppercase tracking-widest text-text-secondary hover:bg-text-primary hover:text-primary hover:border-text-primary transition-all duration-300 cursor-default font-heading">
+                  <span key={cat} className="px-4 py-2 border border-text-primary/10 text-[10px] uppercase tracking-widest text-text-secondary hover:text-primary hover:border-text-primary transition-all duration-300 cursor-default font-heading">
                     {cat}
                   </span>
                 ))}
+              </div>
+              <div className="mt-4">
+                <Link to={`/services/${service.id}`} className="inline-block py-3 px-6 bg-transparent border-2 border-emerald text-emerald hover:bg-emerald hover:text-primary transition-colors font-bold font-heading uppercase text-sm tracking-wider rounded-lg">
+                  View Service Details
+                </Link>
               </div>
             </div>
           </div>
