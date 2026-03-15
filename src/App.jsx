@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
-import ClickSpark from './components/ClickSpark'
+import ClickSpark from './components/ClickSpark';
 import Loader from './components/Loader';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import SocialProof from './components/SocialProof';
-import Services from './components/Services';
-import WhyChooseUs from './components/WhyChooseUs';
-import FeaturedWork from './components/FeaturedWork';
-import Process from './components/Process';
-import Technologies from './components/Technologies';
-import Testimonials from './components/Testimonials';
-import FinalCTA from './components/FinalCTA';
 import Footer from './components/Footer';
-
-function App() {
+import Home from './pages/Home';
+import ServiceDetail from './pages/ServiceDetail';
+function AppContent() {
   const [loading, setLoading] = useState(true);
+  const location = useLocation();
 
   return (
-    <ThemeProvider>
+    <>
       <ClickSpark
         sparkColor="#50C878"
         sparkSize={10}
@@ -28,25 +22,30 @@ function App() {
       >
         {loading && <Loader onFinish={() => setLoading(false)} />}
         <div
-          className={`bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased pb-24 md:pb-0 font-body transition-all duration-700 ${
+          className={`bg-primary min-h-screen text-text-primary selection:bg-emerald selection:text-text-primary antialiased flex flex-col font-body transition-all duration-700 ${
             loading ? 'opacity-0' : 'opacity-100'
           }`}
         >
-          <Navbar loading={loading} />
-          <main>
-            <Hero />
-            <SocialProof />
-            <Services />
-            <WhyChooseUs />
-            <FeaturedWork />
-            <Process />
-            <Technologies />
-            <Testimonials />
-            <FinalCTA />
-          </main>
+          {location.pathname === '/' && <Navbar loading={loading} />}
+          <div className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/services/:serviceId" element={<ServiceDetail />} />
+            </Routes>
+          </div>
           <Footer />
         </div>
       </ClickSpark>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <ThemeProvider>
+      <BrowserRouter>
+        <AppContent />
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
